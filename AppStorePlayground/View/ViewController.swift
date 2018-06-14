@@ -51,21 +51,26 @@ final class ViewController: UIViewController {
         scrollView.backgroundColor = UIColor.brown
         
         // init Grossing App
-        let grossingAppFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
         grossingAppLayout.scrollDirection = .horizontal
-        grossingAppView = UICollectionView(frame: grossingAppFrame, collectionViewLayout: grossingAppLayout)
+        grossingAppView = UICollectionView(frame: CGRect.zero, collectionViewLayout: grossingAppLayout)
         grossingAppView.backgroundColor = UIColor.red
         scrollView.addSubview(grossingAppView)
         
-        // TODO: init Top Free App
-        let offset = CGFloat(20)
-        let ty = grossingAppFrame.height + offset
-        let th = view.frame.height - ty - 300
-        let topFreeAppFrame = CGRect(x: 0, y: ty, width: view.frame.width, height: th)
-        topFreeAppView = UITableView(frame: topFreeAppFrame)
+        grossingAppView.snp.makeConstraints {
+            $0.left.right.top.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+        
+        topFreeAppView = UITableView(frame: CGRect.zero)
         topFreeAppView.backgroundColor = UIColor.blue
         scrollView.addSubview(topFreeAppView)
-        print(topFreeAppView.frame)
+        
+        topFreeAppView.snp.makeConstraints {
+            $0.top.equalTo(grossingAppView.snp.bottom).offset(20)
+            $0.left.right.bottom.equalToSuperview()
+            $0.width.height.equalToSuperview()
+        }
     }
     
     private func bindUI() {

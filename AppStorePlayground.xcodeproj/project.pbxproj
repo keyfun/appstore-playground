@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		3F23923520D4A65A00EC7650 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923420D4A65A00EC7650 /* Feed.swift */; };
 		3F23923720D4A66400EC7650 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923620D4A66400EC7650 /* Entry.swift */; };
+		3F23923920D4F32600EC7650 /* GrossingAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923820D4F32600EC7650 /* GrossingAppView.swift */; };
+		3F23923B20D4F33800EC7650 /* TopFreeViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923A20D4F33800EC7650 /* TopFreeViewApp.swift */; };
+		3F23923D20D4F37900EC7650 /* FreeAppViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923C20D4F37900EC7650 /* FreeAppViewCell.swift */; };
+		3F23923F20D4F82E00EC7650 /* GrossingAppViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923E20D4F82E00EC7650 /* GrossingAppViewCell.swift */; };
+		3F23924120D4FBFA00EC7650 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F23924020D4FBFA00EC7650 /* View.xib */; };
 		3F978CDE20D1662D00B14D94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDD20D1662D00B14D94 /* AppDelegate.swift */; };
 		3F978CE020D1662D00B14D94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDF20D1662D00B14D94 /* ViewController.swift */; };
 		3F978CE320D1662D00B14D94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F978CE120D1662D00B14D94 /* Main.storyboard */; };
@@ -27,6 +32,11 @@
 		1267F9F85DC145AD8BC46E4B /* Pods_AppStorePlayground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStorePlayground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F23923420D4A65A00EC7650 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		3F23923620D4A66400EC7650 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		3F23923820D4F32600EC7650 /* GrossingAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrossingAppView.swift; sourceTree = "<group>"; };
+		3F23923A20D4F33800EC7650 /* TopFreeViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFreeViewApp.swift; sourceTree = "<group>"; };
+		3F23923C20D4F37900EC7650 /* FreeAppViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeAppViewCell.swift; sourceTree = "<group>"; };
+		3F23923E20D4F82E00EC7650 /* GrossingAppViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrossingAppViewCell.swift; sourceTree = "<group>"; };
+		3F23924020D4FBFA00EC7650 /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		3F978CDA20D1662D00B14D94 /* AppStorePlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStorePlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F978CDD20D1662D00B14D94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F978CDF20D1662D00B14D94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +134,7 @@
 			children = (
 				3F978CE620D1662E00B14D94 /* LaunchScreen.storyboard */,
 				3F978CE120D1662D00B14D94 /* Main.storyboard */,
+				3F23924020D4FBFA00EC7650 /* View.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -132,6 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				3F978CDF20D1662D00B14D94 /* ViewController.swift */,
+				3F23923820D4F32600EC7650 /* GrossingAppView.swift */,
+				3F23923A20D4F33800EC7650 /* TopFreeViewApp.swift */,
+				3F23923C20D4F37900EC7650 /* FreeAppViewCell.swift */,
+				3F23923E20D4F82E00EC7650 /* GrossingAppViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F978CE820D1662E00B14D94 /* LaunchScreen.storyboard in Resources */,
+				3F23924120D4FBFA00EC7650 /* View.xib in Resources */,
 				3F978CFF20D17A6600B14D94 /* Localizable.strings in Resources */,
 				3F978CE520D1662E00B14D94 /* Assets.xcassets in Resources */,
 				3F978CE320D1662D00B14D94 /* Main.storyboard in Resources */,
@@ -304,10 +320,14 @@
 			files = (
 				3F978CFA20D16C5800B14D94 /* MainViewModel.swift in Sources */,
 				3F23923520D4A65A00EC7650 /* Feed.swift in Sources */,
+				3F23923920D4F32600EC7650 /* GrossingAppView.swift in Sources */,
 				3F978CFC20D17A0D00B14D94 /* LocaleUtils.swift in Sources */,
+				3F23923F20D4F82E00EC7650 /* GrossingAppViewCell.swift in Sources */,
+				3F23923B20D4F33800EC7650 /* TopFreeViewApp.swift in Sources */,
 				3F978CF120D1690900B14D94 /* APIManager.swift in Sources */,
 				3F978CF320D1694800B14D94 /* RepositoryManager.swift in Sources */,
 				3F978CE020D1662D00B14D94 /* ViewController.swift in Sources */,
+				3F23923D20D4F37900EC7650 /* FreeAppViewCell.swift in Sources */,
 				3F23923720D4A66400EC7650 /* Entry.swift in Sources */,
 				3F978D0520D17B8A00B14D94 /* UIViewControllerExtension.swift in Sources */,
 				3F978CDE20D1662D00B14D94 /* AppDelegate.swift in Sources */,

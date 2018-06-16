@@ -23,7 +23,14 @@ struct Entry {
     var category: String?
     var releaseDate: String?
 
+    init() {
+    }
+    
     init(_ json: JSON) {
+        setData(json)
+    }
+    
+    mutating func setData(_ json: JSON) {
         name = json["im:name"]["label"].stringValue
         image = json["im:image"][2]["label"].stringValue
         summary = json["summary"]["label"].stringValue

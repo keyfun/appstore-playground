@@ -13,13 +13,20 @@ struct Feed {
     var updated: String?
     var title: String?
     var entries: Array<Entry>?
-
+    
+    init() {
+    }
+    
     init(_ json: JSON) {
+        setData(json)
+    }
+    
+    mutating func setData(_ json: JSON) {
         let feed = json["feed"]
         authorName = feed["author"]["name"]["label"].stringValue
         updated = feed["updated"]["label"].stringValue
         title = feed["title"]["label"].stringValue
-
+        
         entries = feed["entry"].array?.map({ (item) -> Entry in
             return Entry(item)
         })

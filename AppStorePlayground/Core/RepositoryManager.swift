@@ -6,6 +6,8 @@
 //  Copyright © 2018 keyfun. All rights reserved.
 //
 
+import Realm
+
 final class RepositoryManager {
     
     static let shared = RepositoryManager()

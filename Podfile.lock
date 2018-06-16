@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.2)
   - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
+  - HCSStarRatingView (1.5)
   - MBProgressHUD (1.1.0)
   - ReachabilitySwift (4.1.0)
   - Realm (3.6.0):
@@ -22,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage (~> 3.3)
+  - HCSStarRatingView (~> 1.5)
   - MBProgressHUD (~> 1.1.0)
   - ReachabilitySwift
   - RealmSwift
@@ -35,6 +37,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - HCSStarRatingView
     - MBProgressHUD
     - ReachabilitySwift
     - Realm
@@ -48,6 +51,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
+  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: 08b464b462d4f31bbd4ba5f5a1c8722ef0a700b7
@@ -58,6 +62,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: c5668dce3e0b47e4c3ae2211bf20f4022360345b
+PODFILE CHECKSUM: 1dc25c9ecb85814ec6075059083511e724b0ba1a
 
 COCOAPODS: 1.5.3

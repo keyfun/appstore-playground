@@ -13,5 +13,6 @@ target 'AppStorePlayground' do
   pod 'RealmSwift'
   pod 'SwiftyJSON'
   pod 'ReachabilitySwift'
+  pod 'HCSStarRatingView', '~> 1.5'
 
 end

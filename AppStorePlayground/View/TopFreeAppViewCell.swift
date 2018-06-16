@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HCSStarRatingView
 
 final class TopFreeAppViewCell: UITableViewCell {
     
@@ -16,10 +17,27 @@ final class TopFreeAppViewCell: UITableViewCell {
     @IBOutlet weak var ivImage: UIImageView!
     @IBOutlet weak var lbCount: UILabel!
     @IBOutlet weak var vRating: UIView!
+    let starView = HCSStarRatingView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         ivImage.clipsToBounds = true
+        addStarView()
+    }
+    
+    private func addStarView() {
+        vRating.addSubview(starView)
+        
+        starView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        starView.maximumValue = 5
+        starView.minimumValue = 0
+        starView.value = 3
+        starView.isUserInteractionEnabled = false
+        starView.backgroundColor = UIColor.clear
+        starView.tintColor = UIColor.orange
     }
     
     func update(index: Int) {

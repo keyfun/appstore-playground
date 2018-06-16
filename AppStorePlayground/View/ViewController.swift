@@ -163,7 +163,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         if let entry = vm.topGrossingAppModel?.entries?[indexPath.item] {
             cell.lbName.text = entry.name
             cell.lbCategory.text = entry.category
-            cell.ivImage.af_setImage(withURL: URL(string: entry.image!)!)
+            cell.ivImage.af_setImage(withURL: URL(string: entry.image100!)!)
 
             cell.setNeedsLayout()
         }
@@ -191,7 +191,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if let entry = vm.topFreeAppModel?.entries?[indexPath.item] {
             cell.lbName.text = entry.name
             cell.lbCategory.text = entry.category
-            cell.ivImage.af_setImage(withURL: URL(string: entry.image!)!)
+            cell.ivImage.af_setImage(withURL: URL(string: entry.image75!)!)
             cell.update(index: indexPath.item)
         }
         

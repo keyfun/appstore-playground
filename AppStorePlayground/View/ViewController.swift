@@ -19,9 +19,7 @@ final class ViewController: UIViewController {
     private lazy var searchBar = UISearchBar()
     private lazy var scrollView = UIScrollView()
 
-    private lazy var grossingAppLayout = UICollectionViewFlowLayout()
-    private var grossingAppView: UICollectionView!
-    fileprivate let reuseIdentifier = "GrossingAppViewCell"
+    private var grossingAppView: GrossingAppView!
 
     private var topFreeAppView: UITableView!
 
@@ -30,10 +28,6 @@ final class ViewController: UIViewController {
         initUI()
         bindUI()
         vm.fetchData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 
     private func initUI() {
@@ -51,17 +45,10 @@ final class ViewController: UIViewController {
         }
 //        scrollView.backgroundColor = UIColor.brown
 
-        // init Grossing App
-        grossingAppLayout.scrollDirection = .horizontal
-        grossingAppLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
-        grossingAppLayout.estimatedItemSize = CGSize(width: 150, height: 200)
-        grossingAppView = UICollectionView(frame: CGRect.zero, collectionViewLayout: grossingAppLayout)
-        grossingAppView.backgroundColor = UIColor.clear
+//         init Grossing App
+        grossingAppView = GrossingAppView()
         grossingAppView.delegate = self
         grossingAppView.dataSource = self
-        grossingAppView.register(UINib(nibName: "Cell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-        
-        grossingAppView.showsHorizontalScrollIndicator = false
         scrollView.addSubview(grossingAppView)
 
         grossingAppView.snp.makeConstraints {
@@ -119,7 +106,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifier,
+            withReuseIdentifier: GrossingAppView.reuseIdentifier,
             for: indexPath) as! GrossingAppViewCell
         
         if let entry = vm.grossingAppModel?.entries?[indexPath.item] {

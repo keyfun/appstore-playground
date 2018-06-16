@@ -50,4 +50,12 @@ final class TopFreeAppViewCell: UITableViewCell {
         }
     }
     
+    func setCount(_ count: Int) {
+        lbCount.text = "(\(count))"
+    }
+    
+    func setRating(_ rating: CGFloat) {
+        starView.value = rating
+    }
+    
 }

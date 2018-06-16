@@ -9,6 +9,7 @@
 import SwiftyJSON
 
 struct Feed {
+    
     var authorName: String?
     var updated: String?
     var title: String?

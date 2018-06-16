@@ -193,6 +193,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lbCategory.text = entry.category
             cell.ivImage.af_setImage(withURL: URL(string: entry.image75!)!)
             cell.update(index: indexPath.item)
+            cell.setCount(entry.userRatingCount ?? 0)
+            cell.setRating(entry.averageUserRating ?? 0)
         }
         
         return cell

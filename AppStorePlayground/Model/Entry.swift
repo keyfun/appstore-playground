@@ -21,7 +21,7 @@ struct Entry {
     var bundleId: String?
     var category: String?
     var releaseDate: String?
-    var averageUserRating: Double?
+    var averageUserRating: CGFloat?
     var userRatingCount: Int?
 
     init() {
@@ -42,6 +42,10 @@ struct Entry {
         link = json["link"]["attributes"]["href"].stringValue
         appId = json["id"]["attributes"]["im:id"].stringValue
         bundleId = json["id"]["attributes"]["im:bundleId"].stringValue
+    }
+    
+    mutating func setUserRating(_ json: JSON) {
+        
     }
 
     func toString() -> String {

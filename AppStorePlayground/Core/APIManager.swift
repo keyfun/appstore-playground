@@ -15,7 +15,7 @@ final class APIManager {
     static let shared = APIManager()
 
     private let kTopGrossingAppUrl = "https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json"
-    private let kTopFreeAppUrl = "https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json"
+    private let kTopFreeAppUrl = "https://itunes.apple.com/hk/rss/topfreeapplications/limit=10/json"
     private let kLookupUrl = "https://itunes.apple.com/hk/lookup?id=%@"
 
     var sIsLoadingTopGrossingApp = PublishSubject<Bool>()
@@ -44,10 +44,30 @@ final class APIManager {
     }
 
     func getTopFreeApp() {
+        var feed = Feed()
         _ = json(.get, kTopFreeAppUrl)
             .observeOn(MainScheduler.instance)
-            .do(onNext: { (result) in
-                self.sGotTopFreeApp.onNext(Feed(JSON(result)))
+            .flatMapLatest({ (result) -> Observable<Any> in
+                feed = Feed(JSON(result))
+
+                var appId = ""
+                feed.entries?.forEach({ (entry) in
+                    appId += entry.appId! + ","
+                })
+
+                let url = String.init(format: self.kLookupUrl, appId)
+                print(url)
+                return json(.get, url)
+            })
+            .do(onNext: { (response) in
+                let json = JSON(response)
+                if let results = json["results"].array, let entries = feed.entries {
+                    for (index, _) in entries.enumerated() {
+                        feed.entries?[index].averageUserRating = CGFloat(results[index]["averageUserRating"].floatValue)
+                        feed.entries?[index].userRatingCount = results[index]["userRatingCount"].intValue
+                    }
+                }
+                self.sGotTopFreeApp.onNext(feed)
             }, onError: { (error) in
                     print(error)
                     self.sIsLoadingTopFreeApp.onNext(false)

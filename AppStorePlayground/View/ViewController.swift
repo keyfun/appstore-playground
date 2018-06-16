@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import RxSwift
+import AlamofireImage
 
 final class ViewController: UIViewController {
 
@@ -20,7 +21,7 @@ final class ViewController: UIViewController {
 
     private lazy var grossingAppLayout = UICollectionViewFlowLayout()
     private var grossingAppView: UICollectionView!
-    fileprivate let reuseIdentifier = "GrossingAppCell"
+    fileprivate let reuseIdentifier = "GrossingAppViewCell"
 
     private var topFreeAppView: UITableView!
 
@@ -53,18 +54,20 @@ final class ViewController: UIViewController {
         // init Grossing App
         grossingAppLayout.scrollDirection = .horizontal
         grossingAppLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        grossingAppLayout.estimatedItemSize = CGSize(width: 150, height: 200)
         grossingAppView = UICollectionView(frame: CGRect.zero, collectionViewLayout: grossingAppLayout)
         grossingAppView.backgroundColor = UIColor.clear
         grossingAppView.delegate = self
         grossingAppView.dataSource = self
-        grossingAppView.register(GrossingAppViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        grossingAppView.register(UINib(nibName: "Cell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        
         grossingAppView.showsHorizontalScrollIndicator = false
         scrollView.addSubview(grossingAppView)
 
         grossingAppView.snp.makeConstraints {
             $0.left.right.top.equalToSuperview()
             $0.width.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(200)
         }
 
         topFreeAppView = UITableView(frame: CGRect.zero)
@@ -117,10 +120,15 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: reuseIdentifier,
-            for: indexPath)
+            for: indexPath) as! GrossingAppViewCell
         
-        cell.backgroundColor = UIColor.black
-        cell.setNeedsLayout()
+        if let entry = vm.grossingAppModel?.entries?[indexPath.item] {
+            cell.lbName.text = entry.name
+            cell.lbCategory.text = entry.category
+            cell.ivImage.af_setImage(withURL: URL(string: entry.image!)!)
+            
+            cell.setNeedsLayout()
+        }
         
         return cell
     }

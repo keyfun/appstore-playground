@@ -1,5 +1,5 @@
 //
-//  FreeAppViewCell.swift
+//  TopFreeAppViewCell.swift
 //  AppStorePlayground
 //
 //  Created by Key Hui on 6/16/18.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-final class FreeAppViewCell: UITableViewCell {
+final class TopFreeAppViewCell: UITableViewCell {
     
 }

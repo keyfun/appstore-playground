@@ -9,7 +9,16 @@
 import UIKit
 
 final class GrossingAppViewCell: UICollectionViewCell {
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var category: UILabel!
-    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var lbCategory: UILabel!
+    @IBOutlet weak var ivImage: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+//        lbName.sizeToFit()
+    }
 }

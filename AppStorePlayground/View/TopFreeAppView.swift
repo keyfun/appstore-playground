@@ -1,5 +1,5 @@
 //
-//  TopFreeViewApp.swift
+//  TopFreeAppView.swift
 //  AppStorePlayground
 //
 //  Created by Key Hui on 6/16/18.

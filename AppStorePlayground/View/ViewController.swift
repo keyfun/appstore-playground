@@ -20,8 +20,10 @@ final class ViewController: UIViewController {
     private lazy var scrollView = UIScrollView()
 
     private var grossingAppView: GrossingAppView!
-
     private var topFreeAppView: UITableView!
+    
+    let placeholderWidth = CGFloat(100) // Fix Size
+    var offset = UIOffset()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,10 @@ final class ViewController: UIViewController {
         // init SearchBar
         navigationItem.titleView = searchBar
         searchBar.placeholder = locale("search_placeholder")
+        // align placeholder to center
+        offset = UIOffset(horizontal: (view.frame.width - placeholderWidth) / 2, vertical: 0)
+        searchBar.setPositionAdjustment(offset, for: .search)
+        searchBar.delegate = self
 
         // init Scroll View
         view.addSubview(scrollView)
@@ -43,9 +49,8 @@ final class ViewController: UIViewController {
             $0.width.equalToSuperview()
             $0.edges.equalToSuperview()
         }
-//        scrollView.backgroundColor = UIColor.brown
 
-//         init Grossing App
+        // init Grossing App
         grossingAppView = GrossingAppView()
         grossingAppView.delegate = self
         grossingAppView.dataSource = self
@@ -57,8 +62,8 @@ final class ViewController: UIViewController {
             $0.height.equalTo(200)
         }
 
+        // init Top Free App
         topFreeAppView = UITableView(frame: CGRect.zero)
-//        topFreeAppView.backgroundColor = UIColor.blue
         scrollView.addSubview(topFreeAppView)
 
         topFreeAppView.snp.makeConstraints {
@@ -66,6 +71,11 @@ final class ViewController: UIViewController {
             $0.left.right.bottom.equalToSuperview()
             $0.width.height.equalToSuperview()
         }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        offset = UIOffset(horizontal: (size.width - placeholderWidth) / 2, vertical: 0)
+        searchBar.setPositionAdjustment(offset, for: .search)
     }
 
     private func bindUI() {
@@ -98,6 +108,21 @@ final class ViewController: UIViewController {
 
 }
 
+extension ViewController: UISearchBarDelegate {
+
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        let noOffset = UIOffset(horizontal: 0, vertical: 0)
+        searchBar.setPositionAdjustment(noOffset, for: .search)
+        return true
+    }
+
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setPositionAdjustment(offset, for: .search)
+        return true
+    }
+
+}
+
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -108,15 +133,15 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: GrossingAppView.reuseIdentifier,
             for: indexPath) as! GrossingAppViewCell
-        
+
         if let entry = vm.grossingAppModel?.entries?[indexPath.item] {
             cell.lbName.text = entry.name
             cell.lbCategory.text = entry.category
             cell.ivImage.af_setImage(withURL: URL(string: entry.image!)!)
-            
+
             cell.setNeedsLayout()
         }
-        
+
         return cell
     }
 

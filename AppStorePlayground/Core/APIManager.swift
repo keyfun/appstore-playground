@@ -8,6 +8,7 @@
 
 import RxAlamofire
 import RxSwift
+import SwiftyJSON
 
 final class APIManager {
 
@@ -20,7 +21,12 @@ final class APIManager {
     func getTopFreeApp() {
         _ = json(.get, kTopFreeAppUrl)
             .observeOn(MainScheduler.instance)
-            .subscribe { print($0) }
+            .subscribe {
+                if let element = $0.element {
+                    let feed = Feed(JSON(element))
+                    print(feed.toString())
+                }
+        }
     }
 
     func getLookup(_ appId: String) {

@@ -24,7 +24,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         initUI()
         bindUI()
-//        vm.fetchData()
+        vm.fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

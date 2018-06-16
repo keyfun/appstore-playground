@@ -9,7 +9,7 @@
 final class MainViewModel {
     
     func fetchData() {
-        APIManager.shared.getTopGrossingApp()
+//        APIManager.shared.getTopGrossingApp()
         APIManager.shared.getTopFreeApp()
     }
     

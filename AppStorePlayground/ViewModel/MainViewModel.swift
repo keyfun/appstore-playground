@@ -22,6 +22,7 @@ final class MainViewModel {
 
     init() {
         // bind API
+        // top grossing app
         APIManager.shared.sIsLoadingTopGrossingApp
             .subscribe(onNext: onIsLoading)
             .disposed(by: disposeBag)
@@ -32,6 +33,19 @@ final class MainViewModel {
 
         APIManager.shared.sGotTopGrossingApp
             .subscribe(onNext: onGotTopGrossingApp)
+            .disposed(by: disposeBag)
+        
+        // top free app
+        APIManager.shared.sIsLoadingTopFreeApp
+            .subscribe(onNext: onIsLoading)
+            .disposed(by: disposeBag)
+        
+        APIManager.shared.sErrorGetTopFreeApp
+            .subscribe(onNext: onError)
+            .disposed(by: disposeBag)
+        
+        APIManager.shared.sGotTopFreeApp
+            .subscribe(onNext: onGotTopFreeApp)
             .disposed(by: disposeBag)
     }
 
@@ -52,6 +66,11 @@ final class MainViewModel {
     private func onGotTopGrossingApp(feed: Feed) {
         topGrossingAppModel = feed
         sGotTopGrossingApp.onNext(())
+    }
+    
+    private func onGotTopFreeApp(feed: Feed) {
+        topFreeAppModel = feed
+        sGotTopFreeApp.onNext(())
     }
     
     func getGrossingAppCount() -> Int {

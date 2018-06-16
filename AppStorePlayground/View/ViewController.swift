@@ -17,6 +17,7 @@ final class ViewController: UIViewController {
 
     private let vm = MainViewModel()
     private lazy var searchBar = UISearchBar()
+    private lazy var activityIndicator = UIActivityIndicatorView()
     private lazy var scrollView = UIScrollView()
 
     private var topGrossingAppView: TopGrossingAppView!
@@ -31,10 +32,15 @@ final class ViewController: UIViewController {
         bindUI()
         vm.fetchData()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        offset = UIOffset(horizontal: (size.width - placeholderWidth) / 2, vertical: 0)
+        searchBar.setPositionAdjustment(offset, for: .search)
+    }
 
     private func initUI() {
         view.backgroundColor = UIColor.white
-
+        
         // init SearchBar
         navigationItem.titleView = searchBar
         searchBar.placeholder = locale("search_placeholder")
@@ -46,7 +52,6 @@ final class ViewController: UIViewController {
         // init Scroll View
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
-            $0.width.equalToSuperview()
             $0.edges.equalToSuperview()
         }
 
@@ -71,11 +76,18 @@ final class ViewController: UIViewController {
             $0.left.right.bottom.equalToSuperview()
             $0.width.height.equalToSuperview()
         }
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        offset = UIOffset(horizontal: (size.width - placeholderWidth) / 2, vertical: 0)
-        searchBar.setPositionAdjustment(offset, for: .search)
+        
+        // init activity indicator
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.snp.makeConstraints {
+            $0.width.height.equalTo(50)
+            $0.top.equalToSuperview().offset(100)
+            $0.centerX.equalToSuperview()
+        }
+        
+        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.startAnimating()
     }
 
     private func bindUI() {
@@ -90,20 +102,32 @@ final class ViewController: UIViewController {
             .disposed(by: disposeBag)
 
         vm.sGotTopGrossingApp
-            .subscribe(onNext: onGotGrossingApp)
+            .subscribe(onNext: onGotTopGrossingApp)
+            .disposed(by: disposeBag)
+        
+        vm.sGotTopFreeApp
+            .subscribe(onNext: onGotTopFreeApp)
             .disposed(by: disposeBag)
     }
 
     private func onIsLoading(value: Bool) {
-        // TODO: show loading
+        if value {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
     }
 
     private func onError(error: Error) {
-        // TODO: show error
+        DialogUtils.show(error.localizedDescription)
     }
 
-    private func onGotGrossingApp() {
+    private func onGotTopGrossingApp() {
         topGrossingAppView.reloadData()
+    }
+    
+    private func onGotTopFreeApp() {
+        topFreeAppView.reloadData()
     }
 
 }

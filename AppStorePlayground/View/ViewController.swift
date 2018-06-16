@@ -21,8 +21,8 @@ final class ViewController: UIViewController {
     private lazy var scrollView = UIScrollView()
 
     private var topGrossingAppView: TopGrossingAppView!
-    private var topFreeAppView: UITableView!
-    
+    private var topFreeAppView: TopFreeAppView!
+
     let placeholderWidth = CGFloat(100) // Fix Size
     var offset = UIOffset()
 
@@ -32,7 +32,7 @@ final class ViewController: UIViewController {
         bindUI()
         vm.fetchData()
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         offset = UIOffset(horizontal: (size.width - placeholderWidth) / 2, vertical: 0)
         searchBar.setPositionAdjustment(offset, for: .search)
@@ -40,7 +40,7 @@ final class ViewController: UIViewController {
 
     private func initUI() {
         view.backgroundColor = UIColor.white
-        
+
         // init SearchBar
         navigationItem.titleView = searchBar
         searchBar.placeholder = locale("search_placeholder")
@@ -68,7 +68,9 @@ final class ViewController: UIViewController {
         }
 
         // init Top Free App
-        topFreeAppView = UITableView(frame: CGRect.zero)
+        topFreeAppView = TopFreeAppView()
+        topFreeAppView.delegate = self
+        topFreeAppView.dataSource = self
         scrollView.addSubview(topFreeAppView)
 
         topFreeAppView.snp.makeConstraints {
@@ -76,16 +78,16 @@ final class ViewController: UIViewController {
             $0.left.right.bottom.equalToSuperview()
             $0.width.height.equalToSuperview()
         }
-        
+
         // init activity indicator
         view.addSubview(activityIndicator)
-        
+
         activityIndicator.snp.makeConstraints {
             $0.width.height.equalTo(50)
             $0.top.equalToSuperview().offset(100)
             $0.centerX.equalToSuperview()
         }
-        
+
         activityIndicator.activityIndicatorViewStyle = .gray
         activityIndicator.startAnimating()
     }
@@ -104,7 +106,7 @@ final class ViewController: UIViewController {
         vm.sGotTopGrossingApp
             .subscribe(onNext: onGotTopGrossingApp)
             .disposed(by: disposeBag)
-        
+
         vm.sGotTopFreeApp
             .subscribe(onNext: onGotTopFreeApp)
             .disposed(by: disposeBag)
@@ -125,7 +127,7 @@ final class ViewController: UIViewController {
     private func onGotTopGrossingApp() {
         topGrossingAppView.reloadData()
     }
-    
+
     private func onGotTopFreeApp() {
         topFreeAppView.reloadData()
     }
@@ -166,6 +168,33 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             cell.setNeedsLayout()
         }
 
+        return cell
+    }
+
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return vm.getTopFreeAppCount()
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: TopFreeAppView.reuseIdentifier,
+            for: indexPath) as! TopFreeAppViewCell
+        
+        if let entry = vm.topFreeAppModel?.entries?[indexPath.item] {
+            cell.lbName.text = entry.name
+            cell.lbCategory.text = entry.category
+            cell.ivImage.af_setImage(withURL: URL(string: entry.image!)!)
+            cell.update(index: indexPath.item)
+        }
+        
         return cell
     }
 

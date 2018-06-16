@@ -13,8 +13,9 @@
 		3F23923B20D4F33800EC7650 /* TopFreeAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923A20D4F33800EC7650 /* TopFreeAppView.swift */; };
 		3F23923D20D4F37900EC7650 /* TopFreeAppViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923C20D4F37900EC7650 /* TopFreeAppViewCell.swift */; };
 		3F23923F20D4F82E00EC7650 /* TopGrossingAppViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23923E20D4F82E00EC7650 /* TopGrossingAppViewCell.swift */; };
-		3F23924520D5107400EC7650 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F23924420D5107400EC7650 /* Cell.xib */; };
+		3F23924520D5107400EC7650 /* TopGrossingAppViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F23924420D5107400EC7650 /* TopGrossingAppViewCell.xib */; };
 		3F23924720D53CA500EC7650 /* DialogUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23924620D53CA500EC7650 /* DialogUtils.swift */; };
+		3F23924920D5411B00EC7650 /* TopFreeAppViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F23924820D5411B00EC7650 /* TopFreeAppViewCell.xib */; };
 		3F978CDE20D1662D00B14D94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDD20D1662D00B14D94 /* AppDelegate.swift */; };
 		3F978CE020D1662D00B14D94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDF20D1662D00B14D94 /* ViewController.swift */; };
 		3F978CE320D1662D00B14D94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F978CE120D1662D00B14D94 /* Main.storyboard */; };
@@ -37,8 +38,9 @@
 		3F23923A20D4F33800EC7650 /* TopFreeAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFreeAppView.swift; sourceTree = "<group>"; };
 		3F23923C20D4F37900EC7650 /* TopFreeAppViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFreeAppViewCell.swift; sourceTree = "<group>"; };
 		3F23923E20D4F82E00EC7650 /* TopGrossingAppViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGrossingAppViewCell.swift; sourceTree = "<group>"; };
-		3F23924420D5107400EC7650 /* Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
+		3F23924420D5107400EC7650 /* TopGrossingAppViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopGrossingAppViewCell.xib; sourceTree = "<group>"; };
 		3F23924620D53CA500EC7650 /* DialogUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogUtils.swift; sourceTree = "<group>"; };
+		3F23924820D5411B00EC7650 /* TopFreeAppViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopFreeAppViewCell.xib; sourceTree = "<group>"; };
 		3F978CDA20D1662D00B14D94 /* AppStorePlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStorePlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F978CDD20D1662D00B14D94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F978CDF20D1662D00B14D94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -137,7 +139,8 @@
 			children = (
 				3F978CE620D1662E00B14D94 /* LaunchScreen.storyboard */,
 				3F978CE120D1662D00B14D94 /* Main.storyboard */,
-				3F23924420D5107400EC7650 /* Cell.xib */,
+				3F23924420D5107400EC7650 /* TopGrossingAppViewCell.xib */,
+				3F23924820D5411B00EC7650 /* TopFreeAppViewCell.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -248,9 +251,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F978CE820D1662E00B14D94 /* LaunchScreen.storyboard in Resources */,
-				3F23924520D5107400EC7650 /* Cell.xib in Resources */,
+				3F23924520D5107400EC7650 /* TopGrossingAppViewCell.xib in Resources */,
 				3F978CFF20D17A6600B14D94 /* Localizable.strings in Resources */,
 				3F978CE520D1662E00B14D94 /* Assets.xcassets in Resources */,
+				3F23924920D5411B00EC7650 /* TopFreeAppViewCell.xib in Resources */,
 				3F978CE320D1662D00B14D94 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

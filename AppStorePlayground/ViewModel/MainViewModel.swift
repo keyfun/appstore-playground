@@ -10,15 +10,15 @@ import RxSwift
 
 final class MainViewModel {
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     var sIsLoading = PublishSubject<Bool>()
     var sError = PublishSubject<Error>()
-    var sGotGrossingApp = PublishSubject<Void>()
+    var sGotTopGrossingApp = PublishSubject<Void>()
     var sGotTopFreeApp = PublishSubject<Void>()
 
+    var topGrossingAppModel: Feed?
     var topFreeAppModel: Feed?
-    var grossingAppModel: Feed?
 
     init() {
         // bind API
@@ -50,12 +50,16 @@ final class MainViewModel {
     }
 
     private func onGotTopGrossingApp(feed: Feed) {
-        grossingAppModel = feed
-        sGotGrossingApp.onNext(())
+        topGrossingAppModel = feed
+        sGotTopGrossingApp.onNext(())
     }
     
     func getGrossingAppCount() -> Int {
-        return grossingAppModel?.entries?.count ?? 0
+        return topGrossingAppModel?.entries?.count ?? 0
+    }
+    
+    func getTopFreeAppCount() -> Int {
+        return topFreeAppModel?.entries?.count ?? 0
     }
 
 }

@@ -13,13 +13,13 @@ import AlamofireImage
 
 final class ViewController: UIViewController {
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     private let vm = MainViewModel()
     private lazy var searchBar = UISearchBar()
     private lazy var scrollView = UIScrollView()
 
-    private var grossingAppView: GrossingAppView!
+    private var topGrossingAppView: TopGrossingAppView!
     private var topFreeAppView: UITableView!
     
     let placeholderWidth = CGFloat(100) // Fix Size
@@ -51,12 +51,12 @@ final class ViewController: UIViewController {
         }
 
         // init Grossing App
-        grossingAppView = GrossingAppView()
-        grossingAppView.delegate = self
-        grossingAppView.dataSource = self
-        scrollView.addSubview(grossingAppView)
+        topGrossingAppView = TopGrossingAppView()
+        topGrossingAppView.delegate = self
+        topGrossingAppView.dataSource = self
+        scrollView.addSubview(topGrossingAppView)
 
-        grossingAppView.snp.makeConstraints {
+        topGrossingAppView.snp.makeConstraints {
             $0.left.right.top.equalToSuperview()
             $0.width.equalToSuperview()
             $0.height.equalTo(200)
@@ -67,7 +67,7 @@ final class ViewController: UIViewController {
         scrollView.addSubview(topFreeAppView)
 
         topFreeAppView.snp.makeConstraints {
-            $0.top.equalTo(grossingAppView.snp.bottom).offset(20)
+            $0.top.equalTo(topGrossingAppView.snp.bottom).offset(20)
             $0.left.right.bottom.equalToSuperview()
             $0.width.height.equalToSuperview()
         }
@@ -89,7 +89,7 @@ final class ViewController: UIViewController {
             .subscribe(onNext: onError)
             .disposed(by: disposeBag)
 
-        vm.sGotGrossingApp
+        vm.sGotTopGrossingApp
             .subscribe(onNext: onGotGrossingApp)
             .disposed(by: disposeBag)
     }
@@ -103,7 +103,7 @@ final class ViewController: UIViewController {
     }
 
     private func onGotGrossingApp() {
-        grossingAppView.reloadData()
+        topGrossingAppView.reloadData()
     }
 
 }
@@ -131,10 +131,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GrossingAppView.reuseIdentifier,
-            for: indexPath) as! GrossingAppViewCell
+            withReuseIdentifier: TopGrossingAppView.reuseIdentifier,
+            for: indexPath) as! TopGrossingAppViewCell
 
-        if let entry = vm.grossingAppModel?.entries?[indexPath.item] {
+        if let entry = vm.topGrossingAppModel?.entries?[indexPath.item] {
             cell.lbName.text = entry.name
             cell.lbCategory.text = entry.category
             cell.ivImage.af_setImage(withURL: URL(string: entry.image!)!)

@@ -1,5 +1,5 @@
 //
-//  GrossingAppView.swift
+//  TopGrossingAppView.swift
 //  AppStorePlayground
 //
 //  Created by Key Hui on 6/16/18.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-final class GrossingAppView: UICollectionView {
+final class TopGrossingAppView: UICollectionView {
     
-    static let reuseIdentifier = "GrossingAppViewCell"
+    static let reuseIdentifier = "TopGrossingAppViewCell"
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -26,7 +26,7 @@ final class GrossingAppView: UICollectionView {
         
         backgroundColor = UIColor.clear
         showsHorizontalScrollIndicator = false
-        register(UINib(nibName: "Cell", bundle: nil), forCellWithReuseIdentifier: GrossingAppView.reuseIdentifier)
+        register(UINib(nibName: "Cell", bundle: nil), forCellWithReuseIdentifier: TopGrossingAppView.reuseIdentifier)
     }
     
 }

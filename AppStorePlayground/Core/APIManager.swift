@@ -46,11 +46,18 @@ final class APIManager {
     func getTopFreeApp() {
         _ = json(.get, kTopFreeAppUrl)
             .observeOn(MainScheduler.instance)
-            .subscribe {
-                if let element = $0.element {
-                    RepositoryManager.shared.topFreeAppModel = Feed(JSON(element))
-                }
-        }
+            .do(onNext: { (result) in
+                self.sGotTopFreeApp.onNext(Feed(JSON(result)))
+            }, onError: { (error) in
+                    print(error)
+                    self.sIsLoadingTopFreeApp.onNext(false)
+                    self.sErrorGetTopFreeApp.onNext(error)
+                }, onCompleted: {
+                    self.sIsLoadingTopFreeApp.onNext(false)
+                }, onSubscribe: {
+                    self.sIsLoadingTopFreeApp.onNext(true)
+                })
+            .subscribe()
     }
 
     func getLookup(_ appId: String) {

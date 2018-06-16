@@ -1,5 +1,5 @@
 //
-//  GrossingAppViewCell.swift
+//  TopGrossingAppViewCell.swift
 //  AppStorePlayground
 //
 //  Created by Key Hui on 6/16/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GrossingAppViewCell: UICollectionViewCell {
+final class TopGrossingAppViewCell: UICollectionViewCell {
 
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbCategory: UILabel!

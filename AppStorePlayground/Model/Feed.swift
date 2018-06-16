@@ -9,15 +9,35 @@
 import SwiftyJSON
 
 struct Feed {
-    var authorName: String = ""
-    var updated: String = ""
-    var title: String = ""
+    var authorName: String?
+    var updated: String?
+    var title: String?
+    var entries: Array<Entry>?
 
     init(_ json: JSON) {
-        authorName = json["feed"]["author"]["name"]["label"].stringValue
+        let feed = json["feed"]
+        authorName = feed["author"]["name"]["label"].stringValue
+        updated = feed["updated"]["label"].stringValue
+        title = feed["title"]["label"].stringValue
+
+        entries = feed["entry"].array?.map({ (item) -> Entry in
+            return Entry(item)
+        })
     }
 
     func toString() -> String {
-        return "authorName = \(authorName)"
+        let format = "authorName = %@,\nupdated = %@,\ntitle = %@\nentryCount = %d"
+        let str = String(format: format,
+            authorName ?? "",
+            updated ?? "",
+            title ?? "",
+            entries?.count ?? 0)
+        return str
+    }
+    
+    func printEntries() {
+        entries?.forEach({ (entry) in
+            print(entry.toString())
+        })
     }
 }

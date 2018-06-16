@@ -25,6 +25,7 @@ final class APIManager {
                 if let element = $0.element {
                     let feed = Feed(JSON(element))
                     print(feed.toString())
+                    feed.printEntries()
                 }
         }
     }

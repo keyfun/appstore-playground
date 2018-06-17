@@ -42,6 +42,9 @@ final class AppHeaderViewModel: SearchViewModel {
             APIManager.shared.getTopGrossingApp()
         } else {
             sError.onNext(AppError.networkError)
+            // get local cache if no network
+            onGotTopGrossingApp(feed: RepositoryManager.shared.topGrossingAppModel)
+            sIsLoading.onNext(false)
         }
     }
 }

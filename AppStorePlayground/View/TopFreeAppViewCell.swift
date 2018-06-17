@@ -35,7 +35,7 @@ final class TopFreeAppViewCell: UITableViewCell {
         
         starView.maximumValue = 5
         starView.minimumValue = 0
-        starView.value = 3
+        starView.value = 0
         starView.isUserInteractionEnabled = false
         starView.backgroundColor = UIColor.clear
         starView.tintColor = UIColor.orange

@@ -34,7 +34,9 @@ final class APIManager {
         _ = json(.get, kTopGrossingAppUrl)
             .observeOn(MainScheduler.instance)
             .do(onNext: { (result) in
-                self.sGotTopGrossingApp.onNext(Feed(JSON(result)))
+                let json = JSON(result)
+                RepositoryManager.shared.saveTopGrossingAppJson(json)
+                self.sGotTopGrossingApp.onNext(Feed(json))
             }, onError: { (error) in
                     print(error)
                     self.sIsLoadingTopGrossingApp.onNext(false)
@@ -89,7 +91,9 @@ final class APIManager {
         _ = json(.get, kTopFreeAppUrl)
             .observeOn(MainScheduler.instance)
             .do(onNext: { (result) in
-                self.sGotTopFreeApp.onNext(Feed(JSON(result)))
+                let json = JSON(result)
+                RepositoryManager.shared.saveTopFreeAppJson(json)
+                self.sGotTopFreeApp.onNext(Feed(json))
             }, onError: { (error) in
                     print(error)
                     self.sIsLoadingTopFreeApp.onNext(false)

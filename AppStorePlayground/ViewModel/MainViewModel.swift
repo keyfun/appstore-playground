@@ -92,7 +92,10 @@ final class MainViewModel: SearchViewModel {
         if NetworkManager.shared.hasNetwork() {
             APIManager.shared.getTopFreeApp()
         } else {
-            sError.onNext(AppError.networkError)
+//            sError.onNext(AppError.networkError)
+            // get local cache if no network
+            onGotTopFreeApp(feed: RepositoryManager.shared.topFreeAppModel)
+            sIsLoading.onNext(false)
         }
     }
 

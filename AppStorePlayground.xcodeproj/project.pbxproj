@@ -32,6 +32,7 @@
 		3F978CFF20D17A6600B14D94 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F978D0120D17A6600B14D94 /* Localizable.strings */; };
 		3F978D0520D17B8A00B14D94 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978D0420D17B8A00B14D94 /* UIViewControllerExtension.swift */; };
 		3FADE70420D65B9200642FFC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FADE70320D65B9200642FFC /* NetworkManager.swift */; };
+		3FADE70620D669E000642FFC /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FADE70520D669E000642FFC /* SearchViewModel.swift */; };
 		98747AE0286080C99BCA8B46 /* Pods_AppStorePlayground.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1267F9F85DC145AD8BC46E4B /* Pods_AppStorePlayground.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		3F978D0220D17A7400B14D94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3F978D0420D17B8A00B14D94 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		3FADE70320D65B9200642FFC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3FADE70520D669E000642FFC /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		58F67EB52581452D95DF7B11 /* Pods-AppStorePlayground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStorePlayground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStorePlayground/Pods-AppStorePlayground.debug.xcconfig"; sourceTree = "<group>"; };
 		A57E641BCB3F25887D2180A3 /* Pods-AppStorePlayground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStorePlayground.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStorePlayground/Pods-AppStorePlayground.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +178,7 @@
 				3F3F4B4620D62C6900E4C240 /* AppHeaderViewModel.swift */,
 				3F3F4B4820D62CE000E4C240 /* BaseViewModel.swift */,
 				3F978CF920D16C5800B14D94 /* MainViewModel.swift */,
+				3FADE70520D669E000642FFC /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				3F978CFA20D16C5800B14D94 /* MainViewModel.swift in Sources */,
 				3F23923520D4A65A00EC7650 /* Feed.swift in Sources */,
 				3F3F4B4920D62CE000E4C240 /* BaseViewModel.swift in Sources */,
+				3FADE70620D669E000642FFC /* SearchViewModel.swift in Sources */,
 				3F23923920D4F32600EC7650 /* TopGrossingAppView.swift in Sources */,
 				3F978CFC20D17A0D00B14D94 /* LocaleUtils.swift in Sources */,
 				3F23923F20D4F82E00EC7650 /* TopGrossingAppViewCell.swift in Sources */,

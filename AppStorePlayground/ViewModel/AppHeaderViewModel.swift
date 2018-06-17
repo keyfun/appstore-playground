@@ -8,13 +8,10 @@
 
 import RxSwift
 
-final class AppHeaderViewModel: BaseViewModel {
+final class AppHeaderViewModel: SearchViewModel {
 
     var sGotTopGrossingApp = PublishSubject<Void>()
     private var topGrossingAppModel: Feed?
-    private var entries = Array<Entry>()
-    private var filterEntries = Array<Entry>()
-    private var isSearchResult = false
 
     override init() {
         super.init()
@@ -45,38 +42,6 @@ final class AppHeaderViewModel: BaseViewModel {
             APIManager.shared.getTopGrossingApp()
         } else {
             // TODO: show retry method
-        }
-    }
-
-    func getEntriesCount() -> Int {
-        return isSearchResult ? filterEntries.count : entries.count
-    }
-    
-    func getEntries() -> Array<Entry> {
-        return isSearchResult ? filterEntries : entries
-    }
-    
-    func getEntry(index: Int) -> Entry {
-        if isSearchResult {
-            if index < filterEntries.count {
-                return filterEntries[index]
-            }
-        } else {
-            if index < entries.count {
-                return entries[index]
-            }
-        }
-        return Entry()
-    }
-    
-    func search(_ searchText: String) {
-        isSearchResult = !searchText.isEmpty
-        
-        filterEntries = entries.filter { (entry) -> Bool in
-            if let name = entry.name {
-                return name.lowercased().contains(searchText.lowercased())
-            }
-            return false
         }
     }
 }

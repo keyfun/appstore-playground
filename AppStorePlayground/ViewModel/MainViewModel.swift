@@ -9,17 +9,14 @@
 import RxSwift
 import SwiftyJSON
 
-final class MainViewModel: BaseViewModel {
+final class MainViewModel: SearchViewModel {
 
     private let pageSize = 10
     private var currentIndex = 0
     private var topFreeAppModel: Feed?
 
     var sGotTopFreeApp = PublishSubject<Void>()
-    private var entries = Array<Entry>()
     private var isLoadingLookup = false
-    private var filterEntries = Array<Entry>() // for search result
-    private var isSearchResult = false
 
     override init() {
         super.init()
@@ -110,38 +107,6 @@ final class MainViewModel: BaseViewModel {
             if let total = topFreeAppModel?.getEntiesCount(), currentIndex + pageSize <= total {
                 APIManager.shared.getLookup(getAppIds(at: currentIndex))
             }
-        }
-    }
-
-    func getEntriesCount() -> Int {
-        return isSearchResult ? filterEntries.count : entries.count
-    }
-
-    func getEntries() -> Array<Entry> {
-        return isSearchResult ? filterEntries : entries
-    }
-
-    func getEntry(index: Int) -> Entry {
-        if isSearchResult {
-            if index < filterEntries.count {
-                return filterEntries[index]
-            }
-        } else {
-            if index < entries.count {
-                return entries[index]
-            }
-        }
-        return Entry()
-    }
-
-    func search(_ searchText: String) {
-        isSearchResult = !searchText.isEmpty
-
-        filterEntries = entries.filter { (entry) -> Bool in
-            if let name = entry.name {
-                return name.lowercased().contains(searchText.lowercased())
-            }
-            return false
         }
     }
 

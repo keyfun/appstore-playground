@@ -7,24 +7,30 @@
 //
 
 import UIKit
+import RxSwift
 
 final class AppHeaderView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var lbTitle: UILabel!
+    private lazy var activityIndicator = UIActivityIndicatorView()
 
-    var topGrossingAppView: TopGrossingAppView!
-    let kGrossingAppHeight = CGFloat(200)
-
-    var vm = MainViewModel()
+    private let disposeBag = DisposeBag()
+    private let kGrossingAppHeight = CGFloat(200)
+    private var topGrossingAppView: TopGrossingAppView!
+    private var vm = AppHeaderViewModel()
 
     override func awakeFromNib() {
         super.awakeFromNib()
         print("AppHeaderView::awakeFromNib")
-        lbTitle.text = locale("recommend")
-        addTopGrossingAppView()
+        initUI()
+        bindUI()
+        vm.fetchData()
     }
 
-    func addTopGrossingAppView() {
+    private func initUI() {
+        lbTitle.text = locale("recommend")
+
+        // init grossing app collection view
         topGrossingAppView = TopGrossingAppView()
         topGrossingAppView.delegate = self
         topGrossingAppView.dataSource = self
@@ -35,15 +41,48 @@ final class AppHeaderView: UITableViewHeaderFooterView {
             $0.left.right.width.equalToSuperview()
             $0.height.equalTo(kGrossingAppHeight)
         }
+        
+        // init activity indicator
+        addSubview(activityIndicator)
+        
+        activityIndicator.snp.makeConstraints {
+            $0.width.height.equalTo(50)
+            $0.top.equalToSuperview().offset(100)
+            $0.centerX.equalToSuperview()
+        }
+        
+        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.startAnimating()
     }
 
-    func setData(_ vm: MainViewModel) {
-        self.vm = vm
-        reloadData()
+    private func bindUI() {
+        vm.sIsLoading
+            .subscribe(onNext: onIsLoading)
+            .disposed(by: disposeBag)
+
+        vm.sError
+            .subscribe(onNext: onError)
+            .disposed(by: disposeBag)
+
+        vm.sGotTopGrossingApp
+            .subscribe(onNext: onGotTopGrossingApp)
+            .disposed(by: disposeBag)
     }
 
-    func reloadData() {
+    private func onGotTopGrossingApp() {
         topGrossingAppView.reloadData()
+    }
+    
+    private func onIsLoading(value: Bool) {
+        if value {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    private func onError(error: Error) {
+        DialogUtils.show(error.localizedDescription)
     }
 
 }

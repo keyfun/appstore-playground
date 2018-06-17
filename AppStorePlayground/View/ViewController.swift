@@ -86,10 +86,6 @@ final class ViewController: UIViewController {
             .subscribe(onNext: onError)
             .disposed(by: disposeBag)
 
-        vm.sGotTopGrossingApp
-            .subscribe(onNext: onGotTopGrossingApp)
-            .disposed(by: disposeBag)
-
         vm.sGotTopFreeApp
             .subscribe(onNext: onGotTopFreeApp)
             .disposed(by: disposeBag)
@@ -105,10 +101,6 @@ final class ViewController: UIViewController {
 
     private func onError(error: Error) {
         DialogUtils.show(error.localizedDescription)
-    }
-
-    private func onGotTopGrossingApp() {
-        headerView?.reloadData()
     }
 
     private func onGotTopFreeApp() {
@@ -133,7 +125,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: TopFreeAppView.reuseIdHeader) as? AppHeaderView
-        headerView?.setData(vm)
         return headerView
     }
     

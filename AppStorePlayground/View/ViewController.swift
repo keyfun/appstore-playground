@@ -16,6 +16,7 @@ final class ViewController: UIViewController {
     private let vm = MainViewModel()
     private lazy var searchBar = UISearchBar()
     private lazy var activityIndicator = UIActivityIndicatorView()
+    private lazy var btnRetry = RetryButton()
 
     private var topFreeAppView: TopFreeAppView!
     private var headerView: AppHeaderView?
@@ -72,6 +73,23 @@ final class ViewController: UIViewController {
 
         activityIndicator.activityIndicatorViewStyle = .gray
         activityIndicator.startAnimating()
+
+        // init retry button
+        view.addSubview(btnRetry)
+
+        btnRetry.snp.makeConstraints {
+            $0.width.equalTo(100)
+            $0.height.equalTo(44)
+            $0.centerX.centerY.equalToSuperview()
+        }
+
+        btnRetry.isHidden = true
+        btnRetry.addTarget(self, action: #selector(onTapRetry), for: .touchUpInside)
+    }
+    
+    @objc private func onTapRetry() {
+        vm.fetchData()
+        headerView?.fetchData() // force fetch data too
     }
 
     private func bindUI() {
@@ -93,6 +111,7 @@ final class ViewController: UIViewController {
     private func onIsLoading(value: Bool) {
         if value {
             activityIndicator.startAnimating()
+            btnRetry.isHidden = true
         } else {
             activityIndicator.stopAnimating()
         }
@@ -100,6 +119,8 @@ final class ViewController: UIViewController {
 
     private func onError(error: Error) {
         DialogUtils.show(error.localizedDescription)
+        onIsLoading(value: false)
+        btnRetry.isHidden = false
     }
 
     private func onGotTopFreeApp() {
@@ -113,7 +134,7 @@ extension ViewController: UISearchBarDelegate {
         print("searchText = \(searchText)")
         vm.search(searchText)
         topFreeAppView.reloadData()
-        
+
         headerView?.search(searchText)
         headerView?.reloadData()
     }
@@ -123,7 +144,7 @@ extension ViewController: UISearchBarDelegate {
         if let searchText = searchBar.text {
             vm.search(searchText)
             topFreeAppView.reloadData()
-            
+
             headerView?.search(searchText)
             headerView?.reloadData()
         }

@@ -54,6 +54,7 @@ final class NetworkManager: NSObject {
 
     func hasNetwork() -> Bool {
         return status != .none
+//        return false
     }
 
     @objc private func reachabilityChanged(_ note: Notification) {

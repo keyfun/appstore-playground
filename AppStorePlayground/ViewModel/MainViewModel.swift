@@ -92,7 +92,7 @@ final class MainViewModel: SearchViewModel {
         if NetworkManager.shared.hasNetwork() {
             APIManager.shared.getTopFreeApp()
         } else {
-            // TODO: show retry method
+            sError.onNext(AppError.networkError)
         }
     }
 

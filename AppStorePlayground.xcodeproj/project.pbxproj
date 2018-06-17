@@ -20,6 +20,8 @@
 		3F3F4B4520D5FCAE00E4C240 /* AppHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F4B4420D5FCAE00E4C240 /* AppHeaderView.xib */; };
 		3F3F4B4720D62C6900E4C240 /* AppHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F4B4620D62C6900E4C240 /* AppHeaderViewModel.swift */; };
 		3F3F4B4920D62CE000E4C240 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F4B4820D62CE000E4C240 /* BaseViewModel.swift */; };
+		3F8007EE20D6B87A006C0CB9 /* ErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8007ED20D6B87A006C0CB9 /* ErrorUtils.swift */; };
+		3F8007F220D6C614006C0CB9 /* RetryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8007F120D6C614006C0CB9 /* RetryButton.swift */; };
 		3F978CDE20D1662D00B14D94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDD20D1662D00B14D94 /* AppDelegate.swift */; };
 		3F978CE020D1662D00B14D94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDF20D1662D00B14D94 /* ViewController.swift */; };
 		3F978CE320D1662D00B14D94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F978CE120D1662D00B14D94 /* Main.storyboard */; };
@@ -51,6 +53,8 @@
 		3F3F4B4420D5FCAE00E4C240 /* AppHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppHeaderView.xib; sourceTree = "<group>"; };
 		3F3F4B4620D62C6900E4C240 /* AppHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderViewModel.swift; sourceTree = "<group>"; };
 		3F3F4B4820D62CE000E4C240 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		3F8007ED20D6B87A006C0CB9 /* ErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUtils.swift; sourceTree = "<group>"; };
+		3F8007F120D6C614006C0CB9 /* RetryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryButton.swift; sourceTree = "<group>"; };
 		3F978CDA20D1662D00B14D94 /* AppStorePlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStorePlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F978CDD20D1662D00B14D94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F978CDF20D1662D00B14D94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				3F23924620D53CA500EC7650 /* DialogUtils.swift */,
+				3F8007ED20D6B87A006C0CB9 /* ErrorUtils.swift */,
 				3F978CFB20D17A0D00B14D94 /* LocaleUtils.swift */,
 			);
 			path = Utils;
@@ -163,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				3F3F4B4220D5FB3400E4C240 /* AppHeaderView.swift */,
+				3F8007F120D6C614006C0CB9 /* RetryButton.swift */,
 				3F23923A20D4F33800EC7650 /* TopFreeAppView.swift */,
 				3F23923C20D4F37900EC7650 /* TopFreeAppViewCell.swift */,
 				3F23923820D4F32600EC7650 /* TopGrossingAppView.swift */,
@@ -346,8 +352,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F8007F220D6C614006C0CB9 /* RetryButton.swift in Sources */,
 				3FADE70420D65B9200642FFC /* NetworkManager.swift in Sources */,
 				3F978CFA20D16C5800B14D94 /* MainViewModel.swift in Sources */,
+				3F8007EE20D6B87A006C0CB9 /* ErrorUtils.swift in Sources */,
 				3F23923520D4A65A00EC7650 /* Feed.swift in Sources */,
 				3F3F4B4920D62CE000E4C240 /* BaseViewModel.swift in Sources */,
 				3FADE70620D669E000642FFC /* SearchViewModel.swift in Sources */,

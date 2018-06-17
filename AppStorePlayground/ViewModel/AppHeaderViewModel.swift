@@ -41,7 +41,7 @@ final class AppHeaderViewModel: SearchViewModel {
         if NetworkManager.shared.hasNetwork() {
             APIManager.shared.getTopGrossingApp()
         } else {
-            // TODO: show retry method
+            sError.onNext(AppError.networkError)
         }
     }
 }

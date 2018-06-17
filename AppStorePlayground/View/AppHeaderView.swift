@@ -83,14 +83,19 @@ final class AppHeaderView: UITableViewHeaderFooterView {
 
     private func onError(error: Error) {
         DialogUtils.show(error.localizedDescription)
+        onIsLoading(value: false)
     }
 
     func search(_ searchText: String) {
         vm.search(searchText)
     }
-    
+
     func reloadData() {
         topGrossingAppView.reloadData()
+    }
+    
+    func fetchData() {
+        vm.fetchData()
     }
 }
 

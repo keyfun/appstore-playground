@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-final class ViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
     private let vm = MainViewModel()
@@ -86,7 +86,7 @@ final class ViewController: UIViewController {
         btnRetry.isHidden = true
         btnRetry.addTarget(self, action: #selector(onTapRetry), for: .touchUpInside)
     }
-    
+
     @objc private func onTapRetry() {
         vm.fetchData()
         headerView?.fetchData() // force fetch data too
@@ -125,11 +125,20 @@ final class ViewController: UIViewController {
 
     private func onGotTopFreeApp() {
         topFreeAppView.reloadData()
+
+        // reload without scroll jump
+//        let contentOffset = topFreeAppView.contentOffset
+//        topFreeAppView.beginUpdates()
+//        topFreeAppView.reloadData()
+//        topFreeAppView.endUpdates()
+//        topFreeAppView.layer.removeAllAnimations()
+//        topFreeAppView.layoutIfNeeded()
+//        topFreeAppView.setContentOffset(contentOffset, animated: false)
     }
 }
 
 // Search Delegate
-extension ViewController: UISearchBarDelegate {
+extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("searchText = \(searchText)")
         vm.search(searchText)
@@ -163,7 +172,7 @@ extension ViewController: UISearchBarDelegate {
 }
 
 // TableView Delegate
-extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
 //            print(String.init(format: "prefetchRowsAt #%i", indexPath.row))
@@ -185,6 +194,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableVie
         return 100
     }
 
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100 // reloadData without scroll jump
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vm.getEntriesCount()
     }
@@ -198,5 +211,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableVie
         cell.update(index: indexPath.item, entry: vm.getEntry(index: indexPath.row))
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if !vm.getEntry(index: indexPath.row).isLoaded {
+            vm.setIsLoaded(index: indexPath.row)
+            cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            UIView.animate(withDuration: 0.4) {
+                cell.transform = CGAffineTransform.identity
+            }
+            UIView.performWithoutAnimation {
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
     }
 }

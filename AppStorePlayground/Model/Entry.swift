@@ -24,6 +24,9 @@ struct Entry {
     var releaseDate: String?
     var averageUserRating: CGFloat?
     var userRatingCount: Int?
+    
+    // for UI Animation
+    var isLoaded = false
 
     init() {
     }

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetworkManager.shared.startMonitoring()
         _ = RepositoryManager.shared // init instance
         
-        let vc = ViewController()
+        let vc = MainViewController()
         let nav = UINavigationController(rootViewController: vc)
         window?.rootViewController = nav
         

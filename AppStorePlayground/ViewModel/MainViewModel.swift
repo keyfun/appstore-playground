@@ -112,5 +112,9 @@ final class MainViewModel: SearchViewModel {
             }
         }
     }
+    
+    func setIsLoaded(index: Int) {
+        entries[index].isLoaded = true
+    }
 
 }

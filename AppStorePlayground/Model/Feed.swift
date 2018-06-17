@@ -48,4 +48,8 @@ struct Feed {
             print(entry.toString())
         })
     }
+    
+    func getEntiesCount() -> Int {
+        return entries?.count ?? 0
+    }
 }

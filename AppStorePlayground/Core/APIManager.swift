@@ -15,7 +15,7 @@ final class APIManager {
     static let shared = APIManager()
 
     private let kTopGrossingAppUrl = "https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json"
-    private let kTopFreeAppUrl = "https://itunes.apple.com/hk/rss/topfreeapplications/limit=10/json"
+    private let kTopFreeAppUrl = "https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json"
     private let kLookupUrl = "https://itunes.apple.com/hk/lookup?id=%@"
 
     var sIsLoadingTopGrossingApp = PublishSubject<Bool>()
@@ -25,6 +25,10 @@ final class APIManager {
     var sIsLoadingTopFreeApp = PublishSubject<Bool>()
     var sErrorGetTopFreeApp = PublishSubject<Error>()
     var sGotTopFreeApp = PublishSubject<Feed>()
+
+    var sIsLoadingLookup = PublishSubject<Bool>()
+    var sErrorGetLookup = PublishSubject<Error>()
+    var sGotLookup = PublishSubject<JSON>()
 
     func getTopGrossingApp() {
         _ = json(.get, kTopGrossingAppUrl)
@@ -43,11 +47,12 @@ final class APIManager {
             .subscribe()
     }
 
-    func getTopFreeApp() {
+    // get all data with lookup
+    func getTopFreeAppWithLookup() {
         var feed = Feed()
         _ = json(.get, kTopFreeAppUrl)
             .observeOn(MainScheduler.instance)
-            .flatMapLatest({ (result) -> Observable<Any> in
+            .flatMap({ (result) -> Observable<Any> in
                 feed = Feed(JSON(result))
 
                 var appId = ""
@@ -80,11 +85,40 @@ final class APIManager {
             .subscribe()
     }
 
+    func getTopFreeApp() {
+        _ = json(.get, kTopFreeAppUrl)
+            .observeOn(MainScheduler.instance)
+            .do(onNext: { (result) in
+                self.sGotTopFreeApp.onNext(Feed(JSON(result)))
+            }, onError: { (error) in
+                    print(error)
+                    self.sIsLoadingTopFreeApp.onNext(false)
+                    self.sErrorGetTopFreeApp.onNext(error)
+                }, onCompleted: {
+                    self.sIsLoadingTopFreeApp.onNext(false)
+                }, onSubscribe: {
+                    self.sIsLoadingTopFreeApp.onNext(true)
+                })
+            .subscribe()
+    }
+
+    // for pagination
     func getLookup(_ appId: String) {
         let url = String.init(format: kLookupUrl, appId)
         print(url)
         _ = json(.get, url)
             .observeOn(MainScheduler.instance)
-            .subscribe { print($0) }
+            .do(onNext: { (result) in
+                self.sGotLookup.onNext(JSON(result))
+            }, onError: { (error) in
+                    print(error)
+                    self.sIsLoadingLookup.onNext(false)
+                    self.sErrorGetLookup.onNext(error)
+                }, onCompleted: {
+                    self.sIsLoadingLookup.onNext(false)
+                }, onSubscribe: {
+                    self.sIsLoadingLookup.onNext(true)
+                })
+            .subscribe()
     }
 }

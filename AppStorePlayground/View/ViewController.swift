@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 import RxSwift
-import AlamofireImage
 
 final class ViewController: UIViewController {
 
@@ -18,7 +17,6 @@ final class ViewController: UIViewController {
     private lazy var searchBar = UISearchBar()
     private lazy var activityIndicator = UIActivityIndicatorView()
 
-    private var topGrossingAppView: TopGrossingAppView!
     private var topFreeAppView: TopFreeAppView!
 
     // for search bar
@@ -54,6 +52,9 @@ final class ViewController: UIViewController {
         topFreeAppView = TopFreeAppView()
         topFreeAppView.delegate = self
         topFreeAppView.dataSource = self
+        if #available(iOS 10.0, *) {
+            topFreeAppView.prefetchDataSource = self
+        }
         topFreeAppView.backgroundColor = UIColor.clear
         view.addSubview(topFreeAppView)
 
@@ -108,6 +109,7 @@ final class ViewController: UIViewController {
     }
 }
 
+// Search Delegate
 extension ViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         let noOffset = UIOffset(horizontal: 0, vertical: 0)
@@ -121,13 +123,21 @@ extension ViewController: UISearchBarDelegate {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+// TableView Delegate
+extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            print(String.init(format: "prefetchRowsAt #%i", indexPath.row))
+            vm.fetchDataIfNeed(at: indexPath.row)
+        }
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: TopFreeAppView.reuseIdHeader) as? AppHeaderView
         return headerView
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 250
     }
@@ -144,16 +154,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: TopFreeAppView.reuseIdentifier,
             for: indexPath) as! TopFreeAppViewCell
-
-        if let entry = vm.topFreeAppModel?.entries?[indexPath.item] {
-            cell.lbName.text = entry.name
-            cell.lbCategory.text = entry.category
-            cell.ivImage.af_setImage(withURL: URL(string: entry.image75!)!)
-            cell.update(index: indexPath.item)
-            cell.setCount(entry.userRatingCount ?? 0)
-            cell.setRating(entry.averageUserRating ?? 0)
-        }
-
+        
+        vm.fetchDataIfNeed(at: indexPath.row)
+        cell.update(index: indexPath.item, entry: vm.entries[indexPath.row])
+        
         return cell
     }
 }

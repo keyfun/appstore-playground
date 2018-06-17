@@ -8,6 +8,7 @@
 
 import UIKit
 import HCSStarRatingView
+import AlamofireImage
 
 final class TopFreeAppViewCell: UITableViewCell {
     
@@ -40,7 +41,7 @@ final class TopFreeAppViewCell: UITableViewCell {
         starView.tintColor = UIColor.orange
     }
     
-    func update(index: Int) {
+    func update(index: Int, entry: Entry) {
         lbOrder.text = "\(index + 1)"
         
         if index % 2 == 0 {
@@ -48,6 +49,12 @@ final class TopFreeAppViewCell: UITableViewCell {
         } else {
             ivImage.layer.cornerRadius = ivImage.frame.width / 2
         }
+        
+        lbName.text = entry.name
+        lbCategory.text = entry.category
+        ivImage.af_setImage(withURL: URL(string: entry.image75!)!)
+        setCount(entry.userRatingCount ?? 0)
+        setRating(entry.averageUserRating ?? 0)
     }
     
     func setCount(_ count: Int) {

@@ -97,7 +97,7 @@ extension AppHeaderView: UICollectionViewDataSource, UICollectionViewDelegate {
             withReuseIdentifier: TopGrossingAppView.reuseIdentifier,
             for: indexPath) as! TopGrossingAppViewCell
 
-        if let entry = vm.topGrossingAppModel?.entries?[indexPath.item] {
+        if let entry = vm.topGrossingAppModel?.entries?[indexPath.row] {
             cell.lbName.text = entry.name
             cell.lbCategory.text = entry.category
             cell.ivImage.af_setImage(withURL: URL(string: entry.image100!)!)

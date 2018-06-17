@@ -11,15 +11,18 @@ import UIKit
 final class TopFreeAppView: UITableView {
 
     static let reuseIdentifier = "TopFreeAppViewCell"
+    static let reuseIdHeader = "AppHeaderView"
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
     init() {
-        super.init(frame: CGRect.zero, style: .plain)
+        super.init(frame: CGRect.zero, style: .grouped)
 
-        register(UINib(nibName: "TopFreeAppViewCell", bundle: nil),
+        register(UINib(nibName: TopFreeAppView.reuseIdentifier, bundle: nil),
             forCellReuseIdentifier: TopFreeAppView.reuseIdentifier)
+        
+        register(UINib(nibName: TopFreeAppView.reuseIdHeader, bundle: nil), forHeaderFooterViewReuseIdentifier: TopFreeAppView.reuseIdHeader)
     }
 }

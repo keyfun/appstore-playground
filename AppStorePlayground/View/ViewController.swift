@@ -14,17 +14,18 @@ import AlamofireImage
 final class ViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
-
     private let vm = MainViewModel()
     private lazy var searchBar = UISearchBar()
     private lazy var activityIndicator = UIActivityIndicatorView()
-    private lazy var scrollView = UIScrollView()
 
     private var topGrossingAppView: TopGrossingAppView!
     private var topFreeAppView: TopFreeAppView!
 
+    // for search bar
     let placeholderWidth = CGFloat(100) // Fix Size
     var offset = UIOffset()
+
+    var headerView: AppHeaderView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,33 +50,15 @@ final class ViewController: UIViewController {
         searchBar.setPositionAdjustment(offset, for: .search)
         searchBar.delegate = self
 
-        // init Scroll View
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
-        // init Grossing App
-        topGrossingAppView = TopGrossingAppView()
-        topGrossingAppView.delegate = self
-        topGrossingAppView.dataSource = self
-        scrollView.addSubview(topGrossingAppView)
-
-        topGrossingAppView.snp.makeConstraints {
-            $0.left.right.top.equalToSuperview()
-            $0.width.equalToSuperview()
-            $0.height.equalTo(200)
-        }
-
         // init Top Free App
         topFreeAppView = TopFreeAppView()
         topFreeAppView.delegate = self
         topFreeAppView.dataSource = self
-        scrollView.addSubview(topFreeAppView)
+        topFreeAppView.backgroundColor = UIColor.clear
+        view.addSubview(topFreeAppView)
 
         topFreeAppView.snp.makeConstraints {
-            $0.top.equalTo(topGrossingAppView.snp.bottom).offset(20)
-            $0.left.right.bottom.equalToSuperview()
+            $0.left.right.top.bottom.equalToSuperview()
             $0.width.height.equalToSuperview()
         }
 
@@ -125,17 +108,15 @@ final class ViewController: UIViewController {
     }
 
     private func onGotTopGrossingApp() {
-        topGrossingAppView.reloadData()
+        headerView?.reloadData()
     }
 
     private func onGotTopFreeApp() {
         topFreeAppView.reloadData()
     }
-
 }
 
 extension ViewController: UISearchBarDelegate {
-
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         let noOffset = UIOffset(horizontal: 0, vertical: 0)
         searchBar.setPositionAdjustment(noOffset, for: .search)
@@ -146,39 +127,24 @@ extension ViewController: UISearchBarDelegate {
         searchBar.setPositionAdjustment(offset, for: .search)
         return true
     }
-
-}
-
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vm.getGrossingAppCount()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: TopGrossingAppView.reuseIdentifier,
-            for: indexPath) as! TopGrossingAppViewCell
-
-        if let entry = vm.topGrossingAppModel?.entries?[indexPath.item] {
-            cell.lbName.text = entry.name
-            cell.lbCategory.text = entry.category
-            cell.ivImage.af_setImage(withURL: URL(string: entry.image100!)!)
-
-            cell.setNeedsLayout()
-        }
-
-        return cell
-    }
-
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: TopFreeAppView.reuseIdHeader) as? AppHeaderView
+        headerView?.setData(vm)
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 250
+    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vm.getTopFreeAppCount()
     }
@@ -187,7 +153,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: TopFreeAppView.reuseIdentifier,
             for: indexPath) as! TopFreeAppViewCell
-        
+
         if let entry = vm.topFreeAppModel?.entries?[indexPath.item] {
             cell.lbName.text = entry.name
             cell.lbCategory.text = entry.category
@@ -196,9 +162,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setCount(entry.userRatingCount ?? 0)
             cell.setRating(entry.averageUserRating ?? 0)
         }
-        
+
         return cell
     }
-
 }
 

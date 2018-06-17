@@ -16,6 +16,8 @@
 		3F23924520D5107400EC7650 /* TopGrossingAppViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F23924420D5107400EC7650 /* TopGrossingAppViewCell.xib */; };
 		3F23924720D53CA500EC7650 /* DialogUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23924620D53CA500EC7650 /* DialogUtils.swift */; };
 		3F23924920D5411B00EC7650 /* TopFreeAppViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F23924820D5411B00EC7650 /* TopFreeAppViewCell.xib */; };
+		3F3F4B4320D5FB3400E4C240 /* AppHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F4B4220D5FB3400E4C240 /* AppHeaderView.swift */; };
+		3F3F4B4520D5FCAE00E4C240 /* AppHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F4B4420D5FCAE00E4C240 /* AppHeaderView.xib */; };
 		3F978CDE20D1662D00B14D94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDD20D1662D00B14D94 /* AppDelegate.swift */; };
 		3F978CE020D1662D00B14D94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F978CDF20D1662D00B14D94 /* ViewController.swift */; };
 		3F978CE320D1662D00B14D94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F978CE120D1662D00B14D94 /* Main.storyboard */; };
@@ -41,6 +43,8 @@
 		3F23924420D5107400EC7650 /* TopGrossingAppViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopGrossingAppViewCell.xib; sourceTree = "<group>"; };
 		3F23924620D53CA500EC7650 /* DialogUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogUtils.swift; sourceTree = "<group>"; };
 		3F23924820D5411B00EC7650 /* TopFreeAppViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopFreeAppViewCell.xib; sourceTree = "<group>"; };
+		3F3F4B4220D5FB3400E4C240 /* AppHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderView.swift; sourceTree = "<group>"; };
+		3F3F4B4420D5FCAE00E4C240 /* AppHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppHeaderView.xib; sourceTree = "<group>"; };
 		3F978CDA20D1662D00B14D94 /* AppStorePlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStorePlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F978CDD20D1662D00B14D94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F978CDF20D1662D00B14D94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -137,10 +141,11 @@
 		3F978CF520D169B900B14D94 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				3F3F4B4420D5FCAE00E4C240 /* AppHeaderView.xib */,
 				3F978CE620D1662E00B14D94 /* LaunchScreen.storyboard */,
 				3F978CE120D1662D00B14D94 /* Main.storyboard */,
-				3F23924420D5107400EC7650 /* TopGrossingAppViewCell.xib */,
 				3F23924820D5411B00EC7650 /* TopFreeAppViewCell.xib */,
+				3F23924420D5107400EC7650 /* TopGrossingAppViewCell.xib */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -148,10 +153,11 @@
 		3F978CF620D16A2B00B14D94 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3F23923820D4F32600EC7650 /* TopGrossingAppView.swift */,
-				3F23923E20D4F82E00EC7650 /* TopGrossingAppViewCell.swift */,
+				3F3F4B4220D5FB3400E4C240 /* AppHeaderView.swift */,
 				3F23923A20D4F33800EC7650 /* TopFreeAppView.swift */,
 				3F23923C20D4F37900EC7650 /* TopFreeAppViewCell.swift */,
+				3F23923820D4F32600EC7650 /* TopGrossingAppView.swift */,
+				3F23923E20D4F82E00EC7650 /* TopGrossingAppViewCell.swift */,
 				3F978CDF20D1662D00B14D94 /* ViewController.swift */,
 			);
 			path = View;
@@ -254,6 +260,7 @@
 				3F23924520D5107400EC7650 /* TopGrossingAppViewCell.xib in Resources */,
 				3F978CFF20D17A6600B14D94 /* Localizable.strings in Resources */,
 				3F978CE520D1662E00B14D94 /* Assets.xcassets in Resources */,
+				3F3F4B4520D5FCAE00E4C240 /* AppHeaderView.xib in Resources */,
 				3F23924920D5411B00EC7650 /* TopFreeAppViewCell.xib in Resources */,
 				3F978CE320D1662D00B14D94 /* Main.storyboard in Resources */,
 			);
@@ -339,6 +346,7 @@
 				3F23924720D53CA500EC7650 /* DialogUtils.swift in Sources */,
 				3F23923D20D4F37900EC7650 /* TopFreeAppViewCell.swift in Sources */,
 				3F23923720D4A66400EC7650 /* Entry.swift in Sources */,
+				3F3F4B4320D5FB3400E4C240 /* AppHeaderView.swift in Sources */,
 				3F978D0520D17B8A00B14D94 /* UIViewControllerExtension.swift in Sources */,
 				3F978CDE20D1662D00B14D94 /* AppDelegate.swift in Sources */,
 			);

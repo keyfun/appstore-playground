@@ -26,7 +26,7 @@ final class TopGrossingAppView: UICollectionView {
 
         backgroundColor = UIColor.clear
         showsHorizontalScrollIndicator = false
-        register(UINib(nibName: "TopGrossingAppViewCell", bundle: nil),
+        register(UINib(nibName: TopGrossingAppView.reuseIdentifier, bundle: nil),
             forCellWithReuseIdentifier: TopGrossingAppView.reuseIdentifier)
     }
 

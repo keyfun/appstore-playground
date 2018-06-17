@@ -16,8 +16,10 @@ final class MainViewModel: BaseViewModel {
     private var topFreeAppModel: Feed?
 
     var sGotTopFreeApp = PublishSubject<Void>()
-    var entries = Array<Entry>()
-    var isLoadingLookup = false
+    private var entries = Array<Entry>()
+    private var isLoadingLookup = false
+    private var filterEntries = Array<Entry>() // for search result
+    private var isSearchResult = false
 
     override init() {
         super.init()
@@ -108,7 +110,22 @@ final class MainViewModel: BaseViewModel {
     }
 
     func getTopFreeAppCount() -> Int {
-        return entries.count
+        return isSearchResult ? filterEntries.count : entries.count
+    }
+
+    func getEntries() -> Array<Entry> {
+        return isSearchResult ? filterEntries : entries
+    }
+
+    func search(_ text: String) {
+        isSearchResult = !text.isEmpty
+
+        filterEntries = entries.filter { (entry) -> Bool in
+            if let name = entry.name {
+                return name.contains(text)
+            }
+            return false
+        }
     }
 
 }

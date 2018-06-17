@@ -82,8 +82,8 @@
 		3F23923320D4A63100EC7650 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3F23923420D4A65A00EC7650 /* Feed.swift */,
 				3F23923620D4A66400EC7650 /* Entry.swift */,
+				3F23923420D4A65A00EC7650 /* Feed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

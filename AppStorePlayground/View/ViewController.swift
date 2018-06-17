@@ -111,6 +111,20 @@ final class ViewController: UIViewController {
 
 // Search Delegate
 extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("searchText = \(searchText)")
+        vm.search(searchText)
+        topFreeAppView.reloadData()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        dismissKeyboard()
+        if let searchText = searchBar.text {
+            vm.search(searchText)
+            topFreeAppView.reloadData()
+        }
+    }
+
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         let noOffset = UIOffset(horizontal: 0, vertical: 0)
         searchBar.setPositionAdjustment(noOffset, for: .search)
@@ -154,11 +168,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCell(
             withIdentifier: TopFreeAppView.reuseIdentifier,
             for: indexPath) as! TopFreeAppViewCell
-        
+
         vm.fetchDataIfNeed(at: indexPath.row)
-        cell.update(index: indexPath.item, entry: vm.entries[indexPath.row])
-        
+        cell.update(index: indexPath.item, entry: vm.getEntries()[indexPath.row])
+
         return cell
     }
 }
-

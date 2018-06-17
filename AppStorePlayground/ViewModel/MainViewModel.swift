@@ -92,7 +92,11 @@ final class MainViewModel: BaseViewModel {
     }
 
     func fetchData() {
-        APIManager.shared.getTopFreeApp()
+        if NetworkManager.shared.hasNetwork() {
+            APIManager.shared.getTopFreeApp()
+        } else {
+            // TODO: show retry method
+        }
     }
 
     func fetchDataIfNeed(at: Int) {
@@ -109,7 +113,7 @@ final class MainViewModel: BaseViewModel {
         }
     }
 
-    func getTopFreeAppCount() -> Int {
+    func getEntriesCount() -> Int {
         return isSearchResult ? filterEntries.count : entries.count
     }
 
@@ -117,12 +121,25 @@ final class MainViewModel: BaseViewModel {
         return isSearchResult ? filterEntries : entries
     }
 
-    func search(_ text: String) {
-        isSearchResult = !text.isEmpty
+    func getEntry(index: Int) -> Entry {
+        if isSearchResult {
+            if index < filterEntries.count {
+                return filterEntries[index]
+            }
+        } else {
+            if index < entries.count {
+                return entries[index]
+            }
+        }
+        return Entry()
+    }
+
+    func search(_ searchText: String) {
+        isSearchResult = !searchText.isEmpty
 
         filterEntries = entries.filter { (entry) -> Bool in
             if let name = entry.name {
-                return name.contains(text)
+                return name.lowercased().contains(searchText.lowercased())
             }
             return false
         }

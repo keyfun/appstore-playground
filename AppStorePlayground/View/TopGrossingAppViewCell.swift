@@ -25,7 +25,7 @@ final class TopGrossingAppViewCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         // align label text to top center
         lbName.frame = lbNameFrame
         lbName.sizeToFit()
@@ -35,6 +35,13 @@ final class TopGrossingAppViewCell: UICollectionViewCell {
             y: newFrame.origin.y,
             width: lbNameFrame.width,
             height: newFrame.height)
+    }
+
+    func update(entry: Entry) {
+        lbName.text = entry.name
+        lbCategory.text = entry.category
+        ivImage.af_setImage(withURL: URL(string: entry.image100!)!)
+        setNeedsLayout()
     }
 
 }

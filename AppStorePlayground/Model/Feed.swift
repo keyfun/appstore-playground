@@ -28,8 +28,10 @@ struct Feed {
         updated = feed["updated"]["label"].stringValue
         title = feed["title"]["label"].stringValue
         
+        var index = 0
         entries = feed["entry"].array?.map({ (item) -> Entry in
-            return Entry(item)
+            index += 1
+            return Entry(item, order: index)
         })
     }
 

@@ -41,16 +41,16 @@ final class AppHeaderView: UITableViewHeaderFooterView {
             $0.left.right.width.equalToSuperview()
             $0.height.equalTo(kGrossingAppHeight)
         }
-        
+
         // init activity indicator
         addSubview(activityIndicator)
-        
+
         activityIndicator.snp.makeConstraints {
             $0.width.height.equalTo(50)
             $0.top.equalToSuperview().offset(100)
             $0.centerX.equalToSuperview()
         }
-        
+
         activityIndicator.activityIndicatorViewStyle = .gray
         activityIndicator.startAnimating()
     }
@@ -72,7 +72,7 @@ final class AppHeaderView: UITableViewHeaderFooterView {
     private func onGotTopGrossingApp() {
         topGrossingAppView.reloadData()
     }
-    
+
     private func onIsLoading(value: Bool) {
         if value {
             activityIndicator.startAnimating()
@@ -80,16 +80,23 @@ final class AppHeaderView: UITableViewHeaderFooterView {
             activityIndicator.stopAnimating()
         }
     }
-    
+
     private func onError(error: Error) {
         DialogUtils.show(error.localizedDescription)
     }
 
+    func search(_ searchText: String) {
+        vm.search(searchText)
+    }
+    
+    func reloadData() {
+        topGrossingAppView.reloadData()
+    }
 }
 
 extension AppHeaderView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vm.getGrossingAppCount()
+        return vm.getEntriesCount()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -97,14 +104,7 @@ extension AppHeaderView: UICollectionViewDataSource, UICollectionViewDelegate {
             withReuseIdentifier: TopGrossingAppView.reuseIdentifier,
             for: indexPath) as! TopGrossingAppViewCell
 
-        if let entry = vm.topGrossingAppModel?.entries?[indexPath.row] {
-            cell.lbName.text = entry.name
-            cell.lbCategory.text = entry.category
-            cell.ivImage.af_setImage(withURL: URL(string: entry.image100!)!)
-
-            cell.setNeedsLayout()
-        }
-
+        cell.update(entry: vm.getEntry(index: indexPath.row))
         return cell
     }
 }

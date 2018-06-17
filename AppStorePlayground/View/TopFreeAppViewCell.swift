@@ -39,10 +39,12 @@ final class TopFreeAppViewCell: UITableViewCell {
         starView.isUserInteractionEnabled = false
         starView.backgroundColor = UIColor.clear
         starView.tintColor = UIColor.orange
+        starView.allowsHalfStars = true
+        starView.accurateHalfStars = true
     }
     
     func update(index: Int, entry: Entry) {
-        lbOrder.text = "\(index + 1)"
+        lbOrder.text = "\(entry.order ?? 0)"
         
         if index % 2 == 0 {
             ivImage.layer.cornerRadius = 16.0

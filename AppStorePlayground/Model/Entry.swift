@@ -9,6 +9,7 @@
 import SwiftyJSON
 
 struct Entry {
+    var order: Int?
     var name: String?
     var image53: String? // height 53
     var image75: String? // height 75
@@ -27,8 +28,9 @@ struct Entry {
     init() {
     }
     
-    init(_ json: JSON) {
+    init(_ json: JSON, order: Int? = nil) {
         setData(json)
+        self.order = order
     }
     
     mutating func setData(_ json: JSON) {
@@ -42,10 +44,6 @@ struct Entry {
         link = json["link"]["attributes"]["href"].stringValue
         appId = json["id"]["attributes"]["im:id"].stringValue
         bundleId = json["id"]["attributes"]["im:bundleId"].stringValue
-    }
-    
-    mutating func setUserRating(_ json: JSON) {
-        
     }
 
     func toString() -> String {

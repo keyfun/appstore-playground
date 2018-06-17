@@ -18,12 +18,11 @@ final class ViewController: UIViewController {
     private lazy var activityIndicator = UIActivityIndicatorView()
 
     private var topFreeAppView: TopFreeAppView!
+    private var headerView: AppHeaderView?
 
     // for search bar
-    let placeholderWidth = CGFloat(100) // Fix Size
-    var offset = UIOffset()
-
-    var headerView: AppHeaderView?
+    private let placeholderWidth = CGFloat(100) // Fix Size
+    private var offset = UIOffset()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +67,7 @@ final class ViewController: UIViewController {
 
         activityIndicator.snp.makeConstraints {
             $0.width.height.equalTo(50)
-            $0.top.equalToSuperview().offset(100)
-            $0.centerX.equalToSuperview()
+            $0.centerX.centerY.equalToSuperview()
         }
 
         activityIndicator.activityIndicatorViewStyle = .gray
@@ -115,6 +113,9 @@ extension ViewController: UISearchBarDelegate {
         print("searchText = \(searchText)")
         vm.search(searchText)
         topFreeAppView.reloadData()
+        
+        headerView?.search(searchText)
+        headerView?.reloadData()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -122,6 +123,9 @@ extension ViewController: UISearchBarDelegate {
         if let searchText = searchBar.text {
             vm.search(searchText)
             topFreeAppView.reloadData()
+            
+            headerView?.search(searchText)
+            headerView?.reloadData()
         }
     }
 
@@ -161,7 +165,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vm.getTopFreeAppCount()
+        return vm.getEntriesCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -170,7 +174,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableVie
             for: indexPath) as! TopFreeAppViewCell
 
         vm.fetchDataIfNeed(at: indexPath.row)
-        cell.update(index: indexPath.item, entry: vm.getEntries()[indexPath.row])
+        cell.update(index: indexPath.item, entry: vm.getEntry(index: indexPath.row))
 
         return cell
     }

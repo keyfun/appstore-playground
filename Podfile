@@ -10,7 +10,6 @@ target 'AppStorePlayground' do
   pod 'RxAlamofire', '~> 4.2.0'
   pod 'AlamofireImage', '~> 3.3'
   pod 'MBProgressHUD', '~> 1.1.0'
-  pod 'RealmSwift'
   pod 'SwiftyJSON'
   pod 'ReachabilitySwift'
   pod 'HCSStarRatingView', '~> 1.5'

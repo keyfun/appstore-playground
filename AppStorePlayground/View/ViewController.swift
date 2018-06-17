@@ -127,7 +127,7 @@ extension ViewController: UISearchBarDelegate {
 extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            print(String.init(format: "prefetchRowsAt #%i", indexPath.row))
+//            print(String.init(format: "prefetchRowsAt #%i", indexPath.row))
             vm.fetchDataIfNeed(at: indexPath.row)
         }
     }

@@ -12,11 +12,12 @@ import SwiftyJSON
 final class MainViewModel: BaseViewModel {
 
     private let pageSize = 10
-    private var currentIndex: Int = 0
+    private var currentIndex = 0
     private var topFreeAppModel: Feed?
 
     var sGotTopFreeApp = PublishSubject<Void>()
     var entries = Array<Entry>()
+    var isLoadingLookup = false
 
     override init() {
         super.init()
@@ -34,7 +35,7 @@ final class MainViewModel: BaseViewModel {
             .disposed(by: disposeBag)
 
         APIManager.shared.sIsLoadingLookup
-            .subscribe(onNext: onIsLoading)
+            .subscribe(onNext: onIsLoadingLookup)
             .disposed(by: disposeBag)
 
         APIManager.shared.sErrorGetLookup
@@ -67,9 +68,14 @@ final class MainViewModel: BaseViewModel {
             var index = 0
             for i in stride(from: currentIndex, to: currentIndex + pageSize, by: 1) {
                 if var entry = topFreeAppModel?.entries?[i] {
-                    entry.averageUserRating = CGFloat(results[index]["averageUserRating"].floatValue)
-                    entry.userRatingCount = results[index]["userRatingCount"].intValue
-                    entries.append(entry)
+                    let target = results[index]
+                    let targetAppId = target["trackId"].stringValue
+                    // double verify is same appId
+                    if entry.appId == targetAppId {
+                        entry.averageUserRating = CGFloat(target["averageUserRating"].floatValue)
+                        entry.userRatingCount = target["userRatingCount"].intValue
+                        entries.append(entry)
+                    }
                 }
                 index += 1
             }
@@ -77,6 +83,10 @@ final class MainViewModel: BaseViewModel {
             currentIndex += pageSize
             sGotTopFreeApp.onNext(())
         }
+    }
+
+    private func onIsLoadingLookup(value: Bool) {
+        isLoadingLookup = value
     }
 
     func fetchData() {
@@ -90,8 +100,10 @@ final class MainViewModel: BaseViewModel {
     }
 
     func getNextLookup() {
-        if let total = topFreeAppModel?.getEntiesCount(), currentIndex + pageSize <= total {
-            APIManager.shared.getLookup(getAppIds(at: currentIndex))
+        if !isLoadingLookup {
+            if let total = topFreeAppModel?.getEntiesCount(), currentIndex + pageSize <= total {
+                APIManager.shared.getLookup(getAppIds(at: currentIndex))
+            }
         }
     }
 

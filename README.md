@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.com/keyfun/appstore-playground.svg?branch=master)](https://travis-ci.com/keyfun/appstore-playground)
 
 # AppStore Playground
-===
 
 AppStore Playground is a sample for using itunes rss api in Swift
 
@@ -14,10 +13,13 @@ AppStore Playground is a sample for using itunes rss api in Swift
 
 ## Getting Started
 
-Run the project
+1. Run the project by
 
 ```
 pod install
 ```
 
-Then open AppStorePlayground.xcworkspace and compile it
+2. Open AppStorePlayground.xcworkspace and compile it ~ enjoy ~
+
+## License
+AppStorePlayground is available under the MIT license.

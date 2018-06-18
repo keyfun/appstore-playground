@@ -28,7 +28,7 @@ final class AppHeaderViewModel: SearchViewModel {
             .subscribe(onNext: onGotTopGrossingApp)
             .disposed(by: disposeBag)
     }
-    
+
     private func onGotTopGrossingApp(feed: Feed) {
         topGrossingAppModel = feed
         if let entries = feed.entries {
@@ -41,10 +41,13 @@ final class AppHeaderViewModel: SearchViewModel {
         if NetworkManager.shared.hasNetwork() {
             APIManager.shared.getTopGrossingApp()
         } else {
-            sError.onNext(AppError.networkError)
-            // get local cache if no network
-            onGotTopGrossingApp(feed: RepositoryManager.shared.topGrossingAppModel)
-            sIsLoading.onNext(false)
+            // get local cache if no network and has cache
+            if RepositoryManager.shared.topGrossingAppModel.getEntiesCount() > 0 {
+                onGotTopGrossingApp(feed: RepositoryManager.shared.topGrossingAppModel)
+                sIsLoading.onNext(false)
+            } else {
+                sError.onNext(AppError.networkError)
+            }
         }
     }
 }

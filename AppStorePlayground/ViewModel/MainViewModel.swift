@@ -38,7 +38,7 @@ final class MainViewModel: SearchViewModel {
             .disposed(by: disposeBag)
 
         APIManager.shared.sErrorGetLookup
-            .subscribe(onNext: onError)
+            .subscribe(onNext: onErrorGetLookup)
             .disposed(by: disposeBag)
 
         APIManager.shared.sGotLookup
@@ -84,6 +84,10 @@ final class MainViewModel: SearchViewModel {
             sGotTopFreeApp.onNext(())
         }
     }
+    
+    private func onErrorGetLookup(error: Error) {
+        print(error.localizedDescription)
+    }
 
     private func onIsLoadingLookup(value: Bool) {
         isLoadingLookup = value
@@ -93,10 +97,13 @@ final class MainViewModel: SearchViewModel {
         if NetworkManager.shared.hasNetwork() {
             APIManager.shared.getTopFreeApp()
         } else {
-//            sError.onNext(AppError.networkError)
-            // get local cache if no network
-            onGotTopFreeApp(feed: RepositoryManager.shared.topFreeAppModel)
-            sIsLoading.onNext(false)
+            // get local cache if no network and has cache
+            if RepositoryManager.shared.topFreeAppModel.getEntiesCount() > 0 {
+                onGotTopFreeApp(feed: RepositoryManager.shared.topFreeAppModel)
+                sIsLoading.onNext(false)
+            } else {
+                sError.onNext(AppError.networkError)
+            }
         }
     }
 
@@ -113,7 +120,7 @@ final class MainViewModel: SearchViewModel {
             }
         }
     }
-    
+
     func setIsLoaded(index: Int) {
         entries[index].isLoaded = true
     }

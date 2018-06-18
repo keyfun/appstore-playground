@@ -7,19 +7,19 @@
 //
 
 class SearchViewModel: BaseViewModel {
-    
+
     internal var entries = Array<Entry>()
     internal var filterEntries = Array<Entry>() // for search result
     internal var isSearchResult = false
-    
+
     func getEntriesCount() -> Int {
         return isSearchResult ? filterEntries.count : entries.count
     }
-    
+
     func getEntries() -> Array<Entry> {
         return isSearchResult ? filterEntries : entries
     }
-    
+
     func getEntry(index: Int) -> Entry {
         if isSearchResult {
             if index < filterEntries.count {
@@ -32,16 +32,28 @@ class SearchViewModel: BaseViewModel {
         }
         return Entry()
     }
-    
+
     func search(_ searchText: String) {
         isSearchResult = !searchText.isEmpty
-        
+
         filterEntries = entries.filter { (entry) -> Bool in
-            if let name = entry.name {
-                return name.lowercased().contains(searchText.lowercased())
+            let lowercasedSearchText = searchText.lowercased()
+            
+            let name = entry.name?.lowercased() ?? ""
+            let cateogry = entry.categoryTerm?.lowercased() ?? ""
+            let summary = entry.summary?.lowercased() ?? ""
+            let artist = entry.artist?.lowercased() ?? ""
+            
+            let array = [name, cateogry, summary, artist]
+            
+            for (_, text) in array.enumerated() {
+                if text.contains(lowercasedSearchText) {
+                    return true
+                }
             }
+            
             return false
         }
     }
-    
+
 }

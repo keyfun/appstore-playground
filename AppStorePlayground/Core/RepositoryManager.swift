@@ -24,8 +24,8 @@ final class RepositoryManager {
         topGrossingAppModel = Feed(loadJson(kTopGrossingApp))
         
         print("[RepositoryManager] init")
-        print(topFreeAppModel.toString())
-        print(topGrossingAppModel.toString())
+//        print(topFreeAppModel.toString())
+//        print(topGrossingAppModel.toString())
     }
 
     private func saveJson(json: JSON, key: String) {

@@ -125,15 +125,6 @@ final class MainViewController: UIViewController {
 
     private func onGotTopFreeApp() {
         topFreeAppView.reloadData()
-
-        // reload without scroll jump
-//        let contentOffset = topFreeAppView.contentOffset
-//        topFreeAppView.beginUpdates()
-//        topFreeAppView.reloadData()
-//        topFreeAppView.endUpdates()
-//        topFreeAppView.layer.removeAllAnimations()
-//        topFreeAppView.layoutIfNeeded()
-//        topFreeAppView.setContentOffset(contentOffset, animated: false)
     }
 }
 

@@ -48,6 +48,7 @@ final class MainViewModel: SearchViewModel {
 
     private func onGotTopFreeApp(feed: Feed) {
         topFreeAppModel = feed
+        topFreeAppModel?.printEntries()
         getNextLookup()
     }
 

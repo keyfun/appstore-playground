@@ -36,19 +36,19 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceg-20-zcN">
-                        <rect key="frame" x="140" y="13" width="211" height="21"/>
+                        <rect key="frame" x="140" y="17" width="211" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63Q-jf-Mxo">
-                        <rect key="frame" x="140" y="42" width="211" height="15"/>
+                        <rect key="frame" x="140" y="46" width="211" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gp-vC-h9x">
-                        <rect key="frame" x="140" y="65" width="80" height="22"/>
+                        <rect key="frame" x="140" y="69" width="80" height="22"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="Brb-c3-Axl"/>
@@ -56,7 +56,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Count)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ve-cw-nMU">
-                        <rect key="frame" x="224" y="68" width="50" height="15"/>
+                        <rect key="frame" x="224" y="72" width="50" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -69,7 +69,7 @@
                     <constraint firstItem="hSw-8g-i2M" firstAttribute="leading" secondItem="hZI-Bf-TIH" secondAttribute="trailing" constant="4" id="8Ks-CA-gSR"/>
                     <constraint firstItem="hSw-8g-i2M" firstAttribute="centerY" secondItem="Vpl-fy-Oux" secondAttribute="centerY" id="AUs-0o-ihn"/>
                     <constraint firstItem="hZI-Bf-TIH" firstAttribute="centerY" secondItem="Vpl-fy-Oux" secondAttribute="centerY" id="Dvi-Y2-5JR"/>
-                    <constraint firstItem="ceg-20-zcN" firstAttribute="top" secondItem="Vpl-fy-Oux" secondAttribute="topMargin" constant="2" id="FCk-rC-QZY"/>
+                    <constraint firstItem="ceg-20-zcN" firstAttribute="top" secondItem="Vpl-fy-Oux" secondAttribute="topMargin" constant="6" id="FCk-rC-QZY"/>
                     <constraint firstItem="1gp-vC-h9x" firstAttribute="leading" secondItem="hSw-8g-i2M" secondAttribute="trailing" constant="8" id="FYu-SQ-Hi0"/>
                     <constraint firstItem="63Q-jf-Mxo" firstAttribute="top" secondItem="ceg-20-zcN" secondAttribute="bottom" constant="8" id="Ggb-fI-njS"/>
                     <constraint firstItem="6ve-cw-nMU" firstAttribute="centerY" secondItem="1gp-vC-h9x" secondAttribute="centerY" id="Mu1-m1-d42"/>

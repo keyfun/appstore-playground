@@ -39,7 +39,7 @@ final class TopGrossingAppViewCell: UICollectionViewCell {
 
     func update(entry: Entry) {
         lbName.text = entry.name
-        lbCategory.text = entry.category
+        lbCategory.text = entry.categoryLabel
         ivImage.af_setImage(withURL: URL(string: entry.image100!)!)
         setNeedsLayout()
     }

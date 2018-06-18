@@ -32,6 +32,7 @@ final class APIManager {
 
     func getTopGrossingApp() {
         _ = json(.get, kTopGrossingAppUrl)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .do(onNext: { (result) in
                 let json = JSON(result)
@@ -53,6 +54,7 @@ final class APIManager {
     func getTopFreeAppWithLookup() {
         var feed = Feed()
         _ = json(.get, kTopFreeAppUrl)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .flatMap({ (result) -> Observable<Any> in
                 feed = Feed(JSON(result))
@@ -89,6 +91,7 @@ final class APIManager {
 
     func getTopFreeApp() {
         _ = json(.get, kTopFreeAppUrl)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .do(onNext: { (result) in
                 let json = JSON(result)
@@ -111,8 +114,10 @@ final class APIManager {
         let url = String.init(format: kLookupUrl, appId)
         print(url)
         _ = json(.get, url)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .do(onNext: { (result) in
+//                print(result)
                 self.sGotLookup.onNext(JSON(result))
             }, onError: { (error) in
                     print(error)

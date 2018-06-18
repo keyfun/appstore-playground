@@ -56,7 +56,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Count)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ve-cw-nMU">
-                        <rect key="frame" x="224" y="72" width="50" height="15"/>
+                        <rect key="frame" x="224" y="72" width="143" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                     <constraint firstItem="1gp-vC-h9x" firstAttribute="top" secondItem="63Q-jf-Mxo" secondAttribute="bottom" constant="8" id="N7T-Xe-YKh"/>
                     <constraint firstAttribute="trailingMargin" secondItem="63Q-jf-Mxo" secondAttribute="trailing" constant="8" id="Q4o-ci-eFd"/>
                     <constraint firstItem="63Q-jf-Mxo" firstAttribute="leading" secondItem="hSw-8g-i2M" secondAttribute="trailing" constant="8" id="cip-UR-H07"/>
-                    <constraint firstAttribute="trailing" secondItem="6ve-cw-nMU" secondAttribute="trailing" constant="101" id="hGa-Yo-ISD"/>
+                    <constraint firstAttribute="trailing" secondItem="6ve-cw-nMU" secondAttribute="trailing" constant="8" id="hGa-Yo-ISD"/>
                     <constraint firstItem="6ve-cw-nMU" firstAttribute="leading" secondItem="1gp-vC-h9x" secondAttribute="trailing" constant="4" id="uvd-E6-GPN"/>
                 </constraints>
             </tableViewCellContentView>

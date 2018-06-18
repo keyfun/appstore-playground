@@ -20,6 +20,9 @@ final class RepositoryManager {
     var topGrossingAppModel: Feed!
 
     private init() {
+        // uncomment it if don't want cache
+//        URLCache.shared.removeAllCachedResponses()
+        
         topFreeAppModel = Feed(loadJson(kTopFreeApp))
         topGrossingAppModel = Feed(loadJson(kTopGrossingApp))
         
